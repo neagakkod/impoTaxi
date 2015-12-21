@@ -1,0 +1,55 @@
+
+
+{{#expense}}
+<ul class="nav nav-tabs" id="expenseFormMenu">
+  <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-plus"></span> Add Expense</a></li>
+  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-edit"></span>Modift Expense</a></li>
+</ul>
+<form id="expenseForm" class="form-horizontal" role="form">
+
+     <div class="form-group">
+	     <label class="control-label col-sm-3" for="expense_date">date:</label>
+	     <div class="col-sm-9">
+	       	<div data-dateValue='{{formatDate date}}'  class='input-group date '>
+                <input data-property="date" type='text'  name="date" value='{{formatDate date}}' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+	     </div>
+     </div>
+     <div class="form-group">
+	     <label class="control-label col-sm-3" for="expense_car">car:</label>
+	     <div class="col-sm-9">
+	   		<select class="car_id_selector" data-property="car_id">
+        		{{{LoadCarDropDownOptions  car }}}
+        	</select>
+	      
+	     </div>
+     </div>
+     <div class="form-group">
+	     <label class="control-label col-sm-3" for="expense_merchant">merchant:</label>
+	     <div class="col-sm-9">
+	       <input type="text" class="form-control" id="expense_merchant" name="merchant" placeholder="merchant">
+	     </div>
+	 </div>
+	 <div class="form-group">
+	     <label class="control-label col-sm-3" for="expense_reason">reason:</label>
+	     <div class="col-sm-9">
+	       <input type="text" class="form-control" id="expense_reason" data-property="reason" name="reason" value='{{reason}}'  placeholder="reason">
+	     </div>
+     </div>
+     <div class="form-group">
+	     <label class="control-label col-sm-3" for="expense_subtotal">sub total:</label>
+	     <div class="col-sm-9">
+	       <input type="text" class="form-control" id="expense_subtotal" data-property="subTotal" name="subTotal" data-isnumeric="true" value='{{subTotal}}'  placeholder="sub total">
+	     </div>
+     </div>
+     <div class="form-group">        
+      <div class="col-sm-offset-10 col-sm-2">
+        <a id="addExpenseButton"  class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span></a>
+        <a id="updateExpenseButton" style="display: none" class="btn btn-primary" ><span class="glyphicon glyphicon-save"></span></a>
+      </div>
+    </div>
+</form>
+{{/expense}}

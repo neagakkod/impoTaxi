@@ -1,0 +1,52 @@
+<table class="table table-striped table-bordered table-hover" id="expenseTable">
+    <thead>
+        <tr>
+            <th style="width:13%">date</th>
+            <th style="width:12%">car</th>
+            <th style="width:15%">Merchant</th>
+            <th style="width:13%">Reason</th>
+            <th style="width:10%">Subtotal</th>
+            <th class="smallCol">TPS</th>
+            <th class="smallCol">TVQ</th>
+            <th class="smallCol">total</th>
+        </tr>
+    </thead>
+    <tbody>
+    	{{#list}}
+        <tr id="{{id}}" class="odd gradeX">
+            <td>
+            {{formatDate date}}
+            </td>
+            <td>
+            {{car.name}}
+            </td>
+             <td>
+            	
+            	
+            </td>
+            <td>{{reason}}</td>
+            <td>{{subTotal}}</td>
+            <td>{{calculateTps subTotal}}</td>
+            <td>{{calculateTvq subTotal}}</td>
+            <td>{{calculateTaxInc subTotal}}</td>
+            <td><a id="udpate_{{id}}" class="btn btn-primary   editExpenseButton"><span class="glyphicon glyphicon-edit"></span></a></td>
+            <td><a class="btn btn-danger  deleteExpenseButton"><span class="glyphicon glyphicon-remove"></span></a></td>
+   
+        </tr>
+        {{/list}}
+    </tbody>
+    <tfoot>
+    <tr>
+    	<th colspan="4"></th> 
+       <!-- <th></th> 
+        <th></th>-->
+        <th>{{calculateTotal list}}</th> 
+        <th>{{calculateTps (calculateTotal list)}}</th> 
+        <th>{{calculateTvq (calculateTotal list)}}</th> 
+        <th>{{calculateTaxInc (calculateTotal list)}}</th>
+       
+    </tr>
+  </tfoot>
+</table>
+
+	

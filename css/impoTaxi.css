@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+
+#expenseTable
+{
+	table-layout: fixed
+}
+th.smallCol
+{
+	border: none !important;
+}
+.smallCol
+{
+	width:7%;
+}
+
+.gridCarChooser
+{  
+	font-size: large;
+	height: 100%;
+    width: 100%;
+}
+
+#expenseFormMenu  a
+{
+	border:    1px solid #ABA8A8;
+}
+#expenseFormMenu
+{
+	border-color: #ABA8A8;
+}
+
+#expenseFormMenu .active a
+{
+	background: #F9F9F9;
+	border-bottom:1px solid #F9F9F9;
+	border-left: 1px solid #ABA8A8;
+	border-right:  1px solid #ABA8A8;
+	border-top:    1px solid #ABA8A8;
+}
+#expenseFormMenu
+{
+	border-color: #ABA8A8;
+}
+    
+#expenseForm
+{
+	background: #F9F9F9;
+	border-bottom:1px solid #ABA8A8;
+	border-left:1px solid #ABA8A8;
+	border-right:   1px solid #ABA8A8;
+	margin-right: 5px;
+	padding: 18px;
+}
+
+.currentlyInEdit
+{
+    background: #70AF86 !important;
+}
+
+.menu-bar 
+{
+	margin: 10px 0 0 0;
+}
+
+.lngh
+{
+	font-size: small;
+	width: 13%;
+}

@@ -1,0 +1,26 @@
+// JavaScript Document
+
+var User={
+	
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

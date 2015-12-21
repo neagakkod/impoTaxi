@@ -1,0 +1,26 @@
+
+<div class="row">
+	
+	<div class="col-sm-3">
+		{{#list}}
+		<a class="btn btn-success btn-xs loadAddWeekBtn" data-month_id="{{month_id}}"><span class="glyphicon glyphicon-plus "></span></a>
+	    <nav class="nav-sidebar">
+			<ul class="nav tabs weeksInMonth">{{writeMonth month_id}}  	
+			 {{#weeks}}
+	          <li id="week{{id}}" data-id={{id}} class="">
+	          	<a href="#tab2" data-toggle="tab">{{formatDateInc date_start}} to {{formatDateInc date_end}}</a> 
+	         
+	          </li>
+	         {{/weeks}}
+			</ul>
+		</nav>
+		{{/list}}
+	</div>
+	
+	<div class="col-sm-9 tab-content">
+		<div id="topForm"></div>
+		<div id="income_viewFloor" class="">
+			
+		</div>
+	</div>
+</div>

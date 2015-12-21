@@ -1,0 +1,35 @@
+[06-Nov-2015 20:26:13 America/Chicago] PHP Fatal error:  Call to a member function get() on a non-object in /home4/kuaminik/public_html/impotaxi/application/controllers/Welcome.php on line 31
+[06-Nov-2015 20:28:05 America/Chicago] PHP Fatal error:  Class 'ExpenseModel' not found in /home4/kuaminik/public_html/impotaxi/application/models/Carexpensemodel.php on line 3
+[06-Nov-2015 20:28:39 America/Chicago] PHP Fatal error:  Class 'ExpenseModel' not found in /home4/kuaminik/public_html/impotaxi/application/models/Carexpensemodel.php on line 3
+[06-Nov-2015 20:29:03 America/Chicago] PHP Fatal error:  Class 'ExpenseModel' not found in /home4/kuaminik/public_html/impotaxi/application/models/Carexpensemodel.php on line 3
+[10-Nov-2015 17:53:05 America/Chicago] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home4/kuaminik/public_html/impotaxi/application/controllers/CarExpenses.php on line 23
+[10-Nov-2015 18:30:30 America/Chicago] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home4/kuaminik/public_html/impotaxi/application/models/Carexpensemodel.php on line 34
+[15-Nov-2015 13:27:59 America/Chicago] PHP Fatal error:  Call to protected method CarExpenseModel::updateCarexpense() from context 'CarExpenses' in /home4/kuaminik/public_html/impotaxi/application/controllers/CarExpenses.php on line 25
+[15-Nov-2015 13:28:26 America/Chicago] PHP Fatal error:  Call to protected method CarExpenseModel::updateCarexpense() from context 'CarExpenses' in /home4/kuaminik/public_html/impotaxi/application/controllers/CarExpenses.php on line 25
+[17-Nov-2015 21:07:35 America/Chicago] PHP Fatal error:  Call to a member function userdata() on a non-object in /home4/kuaminik/public_html/impotaxi/application/core/MY_Controller.php on line 17
+[22-Nov-2015 14:20:49 America/Chicago] PHP Fatal error:  Call to undefined function sixe() in /home4/kuaminik/public_html/impotaxi/application/models/LoginModel.php on line 26
+[22-Nov-2015 14:21:05 America/Chicago] PHP Fatal error:  Call to undefined function size() in /home4/kuaminik/public_html/impotaxi/application/models/LoginModel.php on line 26
+[22-Nov-2015 16:30:38 America/Chicago] PHP Fatal error:  Call to undefined function get_current_url() in /home4/kuaminik/public_html/impotaxi/application/core/MY_Controller.php on line 12
+[22-Nov-2015 16:31:13 America/Chicago] PHP Fatal error:  Function name must be a string in /home4/kuaminik/public_html/impotaxi/application/core/MY_Controller.php on line 31
+[22-Nov-2015 16:33:20 America/Chicago] PHP Fatal error:  Call to a member function database() on a non-object in /home4/kuaminik/public_html/impotaxi/application/models/LoginModel.php on line 10
+[22-Nov-2015 16:33:40 America/Chicago] PHP Fatal error:  Call to a member function database() on a non-object in /home4/kuaminik/public_html/impotaxi/application/models/LoginModel.php on line 10
+[22-Nov-2015 17:41:12 America/Chicago] PHP Fatal error:  Call to a member function database() on a non-object in /home4/kuaminik/public_html/impotaxi/application/models/LoginModel.php on line 10
+[22-Nov-2015 17:42:24 America/Chicago] PHP Fatal error:  Call to a member function database() on a non-object in /home4/kuaminik/public_html/impotaxi/application/models/LoginModel.php on line 10
+[22-Nov-2015 17:42:39 America/Chicago] PHP Fatal error:  Call to a member function database() on a non-object in /home4/kuaminik/public_html/impotaxi/application/models/LoginModel.php on line 10
+[22-Nov-2015 17:43:37 America/Chicago] PHP Fatal error:  Call to a member function database() on a non-object in /home4/kuaminik/public_html/impotaxi/application/models/LoginModel.php on line 10
+[22-Nov-2015 17:49:47 America/Chicago] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home4/kuaminik/public_html/impotaxi/application/core/MY_Controller.php on line 40
+[22-Nov-2015 17:49:51 America/Chicago] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home4/kuaminik/public_html/impotaxi/application/core/MY_Controller.php on line 40
+[22-Nov-2015 17:52:35 America/Chicago] PHP Fatal error:  Call to undefined function get_current_url() in /home4/kuaminik/public_html/impotaxi/application/core/MY_Controller.php on line 26
+[22-Nov-2015 19:45:03 America/Chicago] PHP Fatal error:  Can't use method return value in write context in /home4/kuaminik/public_html/impotaxi/application/controllers/Login.php on line 43
+[22-Nov-2015 19:45:36 America/Chicago] PHP Fatal error:  Can't use method return value in write context in /home4/kuaminik/public_html/impotaxi/application/controllers/Login.php on line 43
+[22-Nov-2015 19:45:44 America/Chicago] PHP Fatal error:  Can't use method return value in write context in /home4/kuaminik/public_html/impotaxi/application/controllers/Login.php on line 43
+[22-Nov-2015 19:47:59 America/Chicago] PHP Fatal error:  Can't use method return value in write context in /home4/kuaminik/public_html/impotaxi/application/controllers/Login.php on line 43
+[05-Dec-2015 20:22:10 America/Chicago] PHP Fatal error:  Call to undefined method TimeRangeModel::get_years() in /home4/kuaminik/public_html/impotaxi/application/controllers/TimeRanges.php on line 15
+[05-Dec-2015 20:22:48 America/Chicago] PHP Fatal error:  Call to undefined method TimeRangeModel::get_years() in /home4/kuaminik/public_html/impotaxi/application/controllers/TimeRanges.php on line 15
+[05-Dec-2015 20:23:49 America/Chicago] PHP Fatal error:  Call to undefined method TimeRangeModel::get_years() in /home4/kuaminik/public_html/impotaxi/application/controllers/TimeRanges.php on line 15
+[06-Dec-2015 12:19:50 America/Chicago] PHP Fatal error:  Call to undefined method CI_Loader::getMonthLyIncomeSummary() in /home4/kuaminik/public_html/impotaxi/application/controllers/HomePage.php on line 26
+[06-Dec-2015 12:21:46 America/Chicago] PHP Fatal error:  Call to undefined method CI_Loader::getMonthLyIncomeSummary() in /home4/kuaminik/public_html/impotaxi/application/controllers/HomePage.php on line 26
+[20-Dec-2015 07:02:51 America/Chicago] PHP Fatal error:  Call to undefined function size() in /home4/kuaminik/public_html/impotaxi/application/controllers/TimeRanges.php on line 50
+[20-Dec-2015 07:05:04 America/Chicago] PHP Fatal error:  Call to undefined function size() in /home4/kuaminik/public_html/impotaxi/application/controllers/TimeRanges.php on line 53
+[20-Dec-2015 09:19:54 America/Chicago] PHP Fatal error:  Call to undefined method TimeRangeModel::addWeeklyIncome() in /home4/kuaminik/public_html/impotaxi/application/controllers/TimeRanges.php on line 70
+[20-Dec-2015 09:30:14 America/Chicago] PHP Fatal error:  Call to undefined method IncomeModel::addWeek() in /home4/kuaminik/public_html/impotaxi/application/controllers/Incomes.php on line 39

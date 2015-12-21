@@ -1,0 +1,103 @@
+// JavaScript Document
+
+var MenuBarController= function(args)
+{
+	var self= this;
+	var usrDisplay= document.getElementById("usrDisplay");
+	var logOutBtn= document.getElementById("logOutBtn");
+	var expenseIncomeToggler = document.getElementById("expenseIncomeToggler");
+	var ControllerOptions = {
+								"income":"IncomeController"
+								,"expense":"ExpenseController"
+							};
+	
+	self.initiatedController = null;						
+	var RegisteredDropdown = function (args){
+		
+		/*
+		args:{id,label}
+		*/
+		var me = this;
+		me.id= args.id;
+		me.label = args.label;
+		me.dropDown = document.getElementById(me.id);
+		me.valueHolder = me.dropDown.children[0].children[0];
+		var reactToChoice = args.reactToChoice;
+		$.each(me.dropDown.children[1].children,function(i,n)
+		{
+			n.onclick=function()
+			{
+				me.valueHolder.innerHTML= me.label+":"+n.dataset.chosendisplay;
+				if(reactToChoice)
+				{
+					reactToChoice(n.dataset.chosenvalue);
+				}
+			};
+		});
+	};
+	
+	self.toggleExpenseIncome = function()
+	{
+			
+		$.each(expenseIncomeToggler.children,function(i,n)
+		{
+			n.classList.remove('active');
+			//console.log(n)
+		});	
+		
+		this.classList.add('active');
+		
+		console.log(this);
+		
+		self.initiatedController = new window[ControllerOptions[this.dataset.option]];
+		
+		self.initiatedController.init();
+	};
+	
+	
+	self.init= function()
+	{
+		$.get(fetcher.Login.getUserInfo,function(userInfo){
+			userInfo=JSON.parse(userInfo);
+			console.log(userInfo);
+			usrDisplay.innerHTML=userInfo.usr;
+		});
+		
+		//launching expenseIncomeToggler
+		var expenseOption = expenseIncomeToggler.children[0];
+		var incomeOption = expenseIncomeToggler.children[1];
+		expenseOption.onclick = self.toggleExpenseIncome;
+		incomeOption.onclick = self.toggleExpenseIncome;
+		
+		
+		//registering Dropdowns
+		var yearDropdown = new RegisteredDropdown({id:"yearDropdown",
+												   label:"Year",
+												   reactToChoice:function(choice)
+												   {
+												   	 	CurrentInfo.year=choice;
+												   }});
+			yearDropdown.valueHolder.innerHTML="Year"+":"+CurrentInfo.year;
+			
+		var trimesterDropdown = new RegisteredDropdown({id:"trimesterDropdown",
+													   label:"Trimester",
+													   reactToChoice:function(choice)
+													   {
+													   	 	CurrentInfo.trimester=TrimesterList[choice];
+													   	 	if(self.initiatedController)
+													   	 		self.initiatedController.init();
+													   }});
+			trimesterDropdown.valueHolder.innerHTML="Trimester"+":"+CurrentInfo.trimester.name;
+			
+		logOutBtn.onclick= function()
+		{
+			$.get(fetcher.Login.logout,function(rslt){
+				rslt=JSON.parse(rslt);
+				if(!rslt.loggedIn)
+					window.location.replace("login.php");
+			});
+		};
+	};
+	
+
+};

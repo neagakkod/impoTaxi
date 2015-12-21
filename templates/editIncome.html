@@ -1,0 +1,40 @@
+
+
+
+<ul class="nav nav-tabs" id="formMenu">
+  <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-plus"></span> Add Income</a></li>
+  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-edit"></span>Modify Income</a></li>
+</ul>
+<form id="incomeForm" class="form-horizontal" role="form">
+
+     <div class="form-group">
+	     <label class="control-label col-sm-3" for="driver">Chauffeur:</label>
+	     <div id="driverHolder" class="col-sm-9">
+	      
+	     </div>
+     </div>
+     <div class="form-group">
+	     <label class="control-label col-sm-3" for="expense_car">Jours:</label>
+	     <div class="col-sm-9">
+	       <input type="text" class="form-control" id="income_days" name="days" value="{{days}}"  data-isnumeric="true"  placeholder="jours">
+	     </div>
+     </div>
+     <div class="form-group">
+	     <label class="control-label col-sm-3" for="income_status">statut:</label>
+	     <div  id="statusHolder" class="col-sm-9">
+	     
+	     </div>
+	 </div>
+	 <div class="form-group">
+	     <label class="control-label col-sm-3" for="income_capital">Capital:</label>
+	     <div class="col-sm-9">
+	       <input type="text" class="form-control" id="income_capital" data-property="grossTotal" name="grossTotal" data-isnumeric="true" value="{{grossTotal}}" placeholder="Capital">
+	     </div>
+     </div>
+     <div class="form-group">        
+      <div class="col-sm-offset-10 col-sm-2">
+        <a id="addSubjectButton"  class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span></a>
+        <a id="updateSubjectButton" style="display: none" class="btn btn-primary" ><span class="glyphicon glyphicon-save"></span></a>
+      </div>
+    </div>
+</form>
