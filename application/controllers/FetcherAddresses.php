@@ -6,10 +6,12 @@ class FetcherAddresses extends CI_Controller
 	public function __construct()
     {
          parent::__construct();
+       //  $this->load->helper('url');
     }
     
 	public function index()
 	{
+	//	$base_url = base_url();
 		$data['FetcherAddresses'] = array("CarExpenses"=>array("getAll"=>"index.php/CarExpenses/",
 															   "add"=>"index.php/CarExpenses/add",
 															   "delete"=>"index.php/CarExpenses/delete/",
@@ -31,6 +33,7 @@ class FetcherAddresses extends CI_Controller
 															 "add"=>"index.php/Incomes/addWeeklyIncome/"),
 											"Drivers"=>array("full"=>"index.php/drivers/get/",
 															 "light"=>"index.php/drivers/getLight/"));
+	 //echo base_url();
 	 	echo json_encode($data['FetcherAddresses']);
 	}
 	
