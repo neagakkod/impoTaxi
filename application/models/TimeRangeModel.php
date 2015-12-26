@@ -81,6 +81,12 @@ class TimeRangeModel extends CI_Model {
 		    return $this->db->insert('Week', $data);
 		}
 		
+		public function deleteWeek($id)
+		{
+		    $this->db->delete('Week', array('id' => $id));
+		   	return ($this->db->affected_rows()>0);
+		}
+		
 		public function updateWeek($week)
 		{
 			
@@ -94,7 +100,7 @@ class TimeRangeModel extends CI_Model {
 		    );
 	
 			$this->db->where('id', $week["id"]);
-			$this->db->update('Week', $data); 
+		    $this->db->update('Week', $data); 
 		}
 }
 ?>

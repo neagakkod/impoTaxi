@@ -19,7 +19,10 @@ var IdentityMap = function(){
 				self.map[this.id]=this;
 			});
 	};
-	
+	self.remove = function(id)
+	{
+		delete self.map[id];
+	}
 	self.add = function(addMe)
 	{
 		self.map[addMe.id]=addMe;
@@ -30,7 +33,7 @@ var IdentityMap = function(){
 var ModelHolder = {
 	car:new IdentityMap(),
 	carExpense:new IdentityMap(),
-	Income:new IdentityMap(),
+	WeeklyIncome:new IdentityMap(),
 	taxInsurances:new IdentityMap(),
 	timeRanges_Months:new IdentityMap(),
 	Week:new IdentityMap(),
@@ -99,29 +102,76 @@ var ModelFinder= function(addressFetcher,ModelType)
 	var self = this;
 	var modelCreator = new ModelCreator(ModelType);
 	self.fetcher = addressFetcher;
-	self.findAll = function(dowhenfound)
+	
+	self.findAll = function(dowhenfound,fetchType)
 	{
+		fetchType=fetchType?fetchType:"getAll";
+
 		if(ModelHolder[ModelType].length>0)
 		{
 			dowhenfound(ModelHolder[ModelType]);
-		}//ModelHolder[ModelType]
+		}
 		else
 		{
-			$.get(self.fetcher.getAll,function(rawArgsList)
+			$.get(self.fetcher[fetchType],function(rawArgsList)
 			{
 				rawArgsList = JSON.parse(rawArgsList);
 			 	var rslt = 	$.map(rawArgsList,function(rawArgs)
-					{
-						return modelCreator.createLightFromRaw(rawArgs);
-					});
+								{
+									return modelCreator.createConcrete(rawArgs);
+								});
 				
 				ModelHolder[ModelType]= rslt;
 				dowhenfound(ModelHolder[ModelType]);
 			});
 		}
 	};
-	self.findAllLight = function(fetchType,dowhenfound)
+	
+	self.findAllBasedOnParams = function(dowhenfound,params)
 	{
+		/*
+		params:{
+			action:"",
+			 id:0
+			
+		}
+		*/
+
+		if(params)
+		{
+			if(ModelHolder[ModelType].length>0)
+			{
+				dowhenfound(ModelHolder[ModelType]);
+			}
+			else
+			{
+				if (params.action && params.id)
+				{
+					$.get(self.fetcher[fetchType]+params.action+"/"+params.id,function(rawArgsList)
+					{
+						rawArgsList = JSON.parse(rawArgsList);
+					 	var rslt = 	$.map(rawArgsList,function(rawArgs)
+										{
+											return modelCreator.createConcrete(rawArgs);
+										});
+						
+						ModelHolder[ModelType]= rslt;
+						dowhenfound(ModelHolder[ModelType]);
+					});
+				}
+				else
+					dowhenfound(ModelHolder[ModelType]);
+			}
+		}
+		else
+			dowhenfound(ModelHolder[ModelType]);
+
+	};
+	
+	self.findAllLight = function(dowhenfound,fetchType)
+	{
+		fetchType=fetchType?fetchType:"getAll";
+		
 		if(ModelHolder[ModelType].size()>0)
 		{
 			dowhenfound(ModelHolder[ModelType].map);

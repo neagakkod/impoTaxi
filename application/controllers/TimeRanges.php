@@ -64,7 +64,7 @@ class TimeRanges extends CI_Controller
 	
 	public function addWeek()
 	{
-			$newWeek = $this->input->post();	
+		$newWeek = $this->input->post();	
 		echo "received";
 		print_r($newWeek);
 		$this->TimeRangeModel->addWeek($newWeek);
@@ -77,6 +77,14 @@ class TimeRanges extends CI_Controller
 		echo "received";
 		print_r($updatedWeek);
 		$this->TimeRangeModel->updateWeek($updatedWeek);
+	}
+	
+	public function deleteWeek($week_id)
+	{
+		$this->IncomeModel->deleteIncomesForWeek($week_id);
+	     	$this->TimeRangeModel->deleteWeek($week_id);
+		 
+		
 	}
 }
 ?>

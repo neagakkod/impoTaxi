@@ -38,5 +38,18 @@ class Incomes extends MY_Controller
 		print_r($income);
 		$this->IncomeModel->addWeeklyIncome($income);
 	}
+	
+	public function updateWeeklyIncome()
+	{
+			$income = $this->input->post();	
+		echo "received";
+		print_r($income);
+		$this->IncomeModel->updateWeeklyIncome($income);
+	}
+
+	public function deleteWeeklyIncomeBYId($id = FALSE)
+	{
+		return $this->IncomeModel->deleteIncomeById($id);
+	}
 }
 ?>

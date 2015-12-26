@@ -50,6 +50,12 @@ Handlebars.registerHelper('writeMonth', function(month_id) {
   return MonthList[month_id][currentLanguage];
 });
 
+Handlebars.registerHelper('writeAsMoney', function(decimalValue) {
+	var _format= '$0.00';
+//	var string = numeral(decimalValue).format('0,0');
+  return numeral(decimalValue).format(_format);
+});
+
 
 Handlebars.registerHelper('LoadCarDropDownOptions', function(/*cars,*/chosenCar) {
   var cars=ModelHolder.Car;
@@ -59,7 +65,7 @@ Handlebars.registerHelper('LoadCarDropDownOptions', function(/*cars,*/chosenCar)
   {
   	selected=(car.id==chosenCar.id)?"selected":"";
    	rslt+="<option "+selected+" value="+car.id+" >"+car.name+"</option>";
-  })
+  });
   rslt+="";
   return rslt;
 });

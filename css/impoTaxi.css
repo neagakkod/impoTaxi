@@ -52,7 +52,15 @@ th.smallCol
 	margin-right: 5px;
 	padding: 18px;
 }
-
+.KuaminikaForm
+{
+	background: #F9F9F9;
+	border-bottom:1px solid #ABA8A8;
+	border-left:1px solid #ABA8A8;
+	border-right:   1px solid #ABA8A8;
+	margin-right: 5px;
+	padding: 18px;
+}
 .currentlyInEdit
 {
     background: #70AF86 !important;

@@ -1,11 +1,12 @@
 <form id="weekForm" class="form-horizontal" role="form">
 
      <div class="form-group">
-	     <label class="control-label col-sm-12" for="driver">{{writeMonth month_id}}  -Ajouter une semaine:</label>
-	    
+	 
+		   <label class="control-label col-sm-12" >{{writeMonth month_id}}  -<span class="formTitleHolder"></span>:</label>
+
      </div>
      <div class="form-group">
-	     <label class="control-label col-sm-1" for="expense_car">De:</label>
+	     <label class="control-label col-sm-1" >De:</label>
 	     <div class="col-sm-4">
 	       <div data-dateValue='{{formatDate date}}' data-attribute='date_start' class='input-group kuaminikaDateComponent '>
                 <input data-property="date" type='text'  name="date" value='{{formatDate date_start}}' class="form-control" />
@@ -14,7 +15,7 @@
                 </span>
             </div>
 	     </div>
-	      <label class="control-label col-sm-1" for="income_capital">&Aacute;:</label>
+	      <label class="control-label col-sm-1" f>&Aacute;:</label>
 	     <div class="col-sm-4">
 	      <div data-dateValue='{{formatDate date}}' data-attribute='date_end' class='input-group kuaminikaDateComponent '>
                 <input data-property="date" type='text'  name="date" value='{{formatDate date_end}}' class="form-control" />
@@ -24,9 +25,10 @@
             </div>
 	     </div>
 	     <div class="col-sm-2">
-        <a  class="btn btn-success addSubjectButton" ><span class="glyphicon glyphicon-plus"></span></a>
-        <a  style="display: none " class="btn btn-primary updateSubjectButton" ><span class="glyphicon glyphicon-save"></span></a>
-      </div>
+	        <a  class="btn btn-success addSubjectButton" ><span class="glyphicon glyphicon-plus"></span></a>
+	        <a  style="display: none " class="btn btn-primary updateSubjectButton btn-xs" ><span class="glyphicon glyphicon-save"></span></a>
+	        <a  style="display: none "  class="btn btn-danger  deleteSubjectButton btn-xs"><span class="glyphicon glyphicon-remove "></span></a>
+	      </div>
      </div>
    
      

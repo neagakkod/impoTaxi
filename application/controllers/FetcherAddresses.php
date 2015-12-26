@@ -26,11 +26,14 @@ class FetcherAddresses extends CI_Controller
 																"allWeeksInMonth"=>"index.php/TimeRanges/getAllWeeksInMonth",
 																"allWeeksInTrimester"=>"index.php/TimeRanges/getAllWeeksInTrimester",
 																"addWeek"=>"index.php/TimeRanges/addWeek",
-																"updateWeek"=>"index.php/TimeRanges/updateWeek"),
+																"updateWeek"=>"index.php/TimeRanges/updateWeek",
+																"deleteWeek"=>"index.php/TimeRanges/deleteWeek"),
 											"Incomes"=>array("yearSummary"=>"",
 															 "monthSummary"=>"index.php/Incomes/monthIncomeSummary/",
 															 "weeklyIncome"=>"index.php/Incomes/incomesInWeek/",
-															 "add"=>"index.php/Incomes/addWeeklyIncome/"),
+															 "add"=>"index.php/Incomes/addWeeklyIncome/",
+															 "update"=>"index.php/Incomes/updateWeeklyIncome/",
+															 "delete"=>"index.php/Incomes/deleteWeeklyIncomeBYId/"),
 											"Drivers"=>array("full"=>"index.php/drivers/get/",
 															 "light"=>"index.php/drivers/getLight/"));
 	 //echo base_url();

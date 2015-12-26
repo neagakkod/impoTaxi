@@ -8,18 +8,21 @@ options:
 	subject:{},
 	operation:"" //either "add" or "update",
 	updateBtnProcedure:function(){},
-	addBtnProcedure:function(){}
+	addBtnProcedure:function(){},
+	subjectType:""
 }
 */
 var KuaminikaForm = function(options)
 {
 	var self = this;
 	
-
+	var subjectCreator = new ModelCreator(options.subjectType);
 	self.holderId = options.holderId;
 	self.operation = options.operation;
     self.form_container = document.getElementById(self.holderId);
 	self.subject = options.subject;
+	self.blankSubject = self.subject.blank ? self.subject : subjectCreator.createBlank();
+	
 	self.view = new KuaminikaView({viewName:options.viewName,
 	 							   digestView:function(template)
 										   {
@@ -38,62 +41,52 @@ var KuaminikaForm = function(options)
 		if(self.form_container)
 			self.form_container.innerHTML="";
 	};
+	
+	self.modeMenu = new FormModeMenu();
 	self.loadProcedure = function(){
 			
-			var menuForm= document.getElementById("formMenu");
-			var addMenuItem = menuForm.children[0];
-				addMenuItem.onclick=function()
-				{
-				//	self.subject = 
+			self.modeMenu.addeModeHandler= function()
+				{ 
+					self.subject = self.blankSubject;
+					self.operation="add";
 					self.load();
-					self.activateMode("add");
+					
 				};
-			var updateMenuItem = menuForm.children[1];
-				updateMenuItem.onclick=function()
-				{
-					self.expense=options.expenseList[0];
-					$(".currentlyInEdit").removeClass("currentlyInEdit");
-					$("#"+self.subject.id).addClass("currentlyInEdit");
-					menuForm.remove();
-					form.remove();
-					self.load();
-					self.activateMode("update");
-				};
+		   self.modeMenu.activate();	
+		
+			
 			var addBtn = document.getElementById("addSubjectButton");
 			var updateBtn =  document.getElementById("updateSubjectButton");
 			var allInputs = $(self.form_container.getElementsByTagName('input'));
+		
+			
 			allInputs.change(function()
 			{
 				self.subject[this.name]=this.dataset.isnumeric?parseInt(this.value):this.value;
 			});
 			addBtn.onclick=function(e)
 			{
-			//	menuForm.remove();
-			
 				options.addBtnProcedure(self.subject);
 			};
 			
 			
 			updateBtn.onclick=function()
 			{
-				menuForm.remove();
-				form.remove();
 				options.updateBtnProcedure(self.subject);
 			};
 			
-			self.updateBtn=$(updateBtn);
-			self.addBtn=$(addBtn);
-			self.addMenuItem=$(addMenuItem);
-			self.updateMenuItem=$(updateMenuItem);
-			self.activateMode(options.action);
+			self.updateBtn = $(updateBtn);
+			self.addBtn = $(addBtn);
+		
+			if(self.operation)
+				self.activateMode(self.operation);
 		};
 	
 	self.load= function()
 	{
-		self.view.postDigest= self.loadProcedure ;
-			
+		console.log ("inside form.load():%O",self.subject);
+		self.view.postDigest = self.loadProcedure ;
 	 	self.view.execute();
-		
 	};
 
 	self.activateMode=function(mode)
@@ -103,17 +96,17 @@ var KuaminikaForm = function(options)
 		{
 			self.updateBtn.show();
 			self.addBtn.hide();
-		//	self.addMenuItem.removeClass("active");
-		//	self.updateMenuItem.addClass("active");
-			
+			if(self.modeMenu.activated)
+				self.modeMenu.activateMode(mode);
 		}
 		else
 		{
+		//	self.subject = self.blankSubject;
 			self.updateBtn.hide();
-			self.addBtn.show();
-			$(".currentlyInEdit").removeClass("currentlyInEdit");
-		//	self.addMenuItem.addClass("active");
-		//	self.updateMenuItem.removeClass("active");
+			self.addBtn.show();	
+			if(self.modeMenu.activated)
+				self.modeMenu.activateMode(mode);
+		
 		}
 	};
 	

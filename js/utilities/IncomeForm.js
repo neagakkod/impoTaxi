@@ -7,19 +7,28 @@ var IncomeForm = function (options)
 	var driverFinder = new ModelFinder(fetcher["Drivers"],"Driver");
 	self.loadProcedure = function()
 	{
-		
-		driverFinder.findAllLight("light",function(driverList){
+	
+		driverFinder.findAllLight(function(driverList){
 			self.driverDropdown.list=$.map(driverList,function(value,key){
 														 	return {chosenValue:key,chosenDisplay:value.first_name};
 														 });
 															 
 			var selectedDriver = self.subject.driver?self.subject.driver:driverList[1];
-			self.driverDropdown.initialValue={chosenValue:selectedDriver.id,chosenDisplay:selectedDriver.first_name};
+			var selectedStatus = self.subject.driverStatus;
+			self.statusDropdown.initialValue = {chosenValue:selectedStatus.id,chosenDisplay:selectedStatus[currentLanguage]};
+			self.driverDropdown.initialValue = {chosenValue:selectedDriver.id,chosenDisplay:selectedDriver.first_name};
 			self.subject.driver=selectedDriver;
 			superLoad();
+			var allInputs = $(self.form_container.getElementsByTagName('input'));
+			allInputs.change(function()
+			{
+				self.subject[this.name]=this.dataset.isnumeric?parseInt(this.value):this.value;
+				self.subject.applyDaysChanges();
+			});
+			
 			self.statusDropdown.load();
 			self.driverDropdown.load();
-		});
+		},"light");
 	};
 	
 	
@@ -46,5 +55,11 @@ var IncomeForm = function (options)
 											});
 	
 };
-IncomeForm.prototype=Object.create(KuaminikaForm.prototype);
+
+IncomeForm.prototype = (function() {
+  var Base = function() {};
+  Base.prototype = KuaminikaForm.prototype;
+  return new Base();
+}());
+//IncomeForm.prototype=Object.create(KuaminikaForm.prototype);
 IncomeForm.prototype.constructor = IncomeForm;

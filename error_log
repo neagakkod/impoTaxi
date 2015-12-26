@@ -35,3 +35,4 @@
 [20-Dec-2015 09:30:14 America/Chicago] PHP Fatal error:  Call to undefined method IncomeModel::addWeek() in /home4/kuaminik/public_html/impotaxi/application/controllers/Incomes.php on line 39
 [20-Dec-2015 18:33:28 America/Chicago] PHP Fatal error:  Call to undefined function base_url() in /home4/kuaminik/public_html/dev/impotaxi/trunk/application/controllers/FetcherAddresses.php on line 34
 [20-Dec-2015 18:33:59 America/Chicago] PHP Fatal error:  Call to undefined function base_url() in /home4/kuaminik/public_html/dev/impotaxi/trunk/application/controllers/FetcherAddresses.php on line 34
+[21-Dec-2015 18:45:32 America/Chicago] PHP Fatal error:  Call to undefined function isAddableToPreExisting() in /home4/kuaminik/public_html/dev/impotaxi/trunk/application/models/IncomeModel.php on line 95

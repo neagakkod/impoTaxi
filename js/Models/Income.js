@@ -39,17 +39,21 @@ var WeeklyIncome = function(args)
 	self.week_id = args.week_id;
 	self.driver = args.driver?args.driver:null;
 	self.days = args.days?args.days:0;
-	
-	if(self.days)
+	self.netTotal= 0;
+	self.applyDaysChanges = function()
 	{
-		
-		self.netTotal= self.grossTotal; 
+			self.netTotal= self.grossTotal; 
 		$.each(self.TaxesAndInsurances,function(i,n)
 		{
 			self[n.name] = n.calculate(self.days);
 			self.netTotal = self.netTotal - self[n.name];
 		//console.log("ff")	
 		});
+	
+	}
+	if(self.days)
+	{
+		self.applyDaysChanges();
 	
 	}
 	

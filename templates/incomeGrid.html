@@ -28,12 +28,12 @@
             </td>
             <td>{{days}}</td>
             <td>{{driverStatus.en}}</td>
-            <td>{{grossTotal}}</td>
-            <td>{{chom_empl}}</td>
-            <td>{{chom_prop}}</td>
-            <td>{{netTotal}}</td>
-            <td class="smallCol"><a id="udpate_{{id}}" class="btn btn-primary    btn-xs"><span class="glyphicon glyphicon-edit "></span></a></td>
-            <td class="smallCol"><a class="btn btn-danger   btn-xs"><span class="glyphicon glyphicon-remove "></span></a></td>
+            <td>{{writeAsMoney grossTotal}}</td>
+            <td>{{writeAsMoney chom_empl}}</td>
+            <td>{{writeAsMoney chom_prop}}</td>
+            <td>{{writeAsMoney netTotal}}</td>
+            <td class="smallCol"><a id="udpate_{{id}}" class="btn updateSubjectBtn btn-primary    btn-xs"><span class="glyphicon glyphicon-edit "></span></a></td>
+            <td class="smallCol"><a id="delete_{{id}}" class="btn btn-danger  deleteSubjectBtn btn-xs"><span class="glyphicon glyphicon-remove "></span></a></td>
    
         </tr>
         {{/list}}

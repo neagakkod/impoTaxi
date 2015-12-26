@@ -3,10 +3,12 @@ var TemplateHolder = {};
 var KuaminikaView = function(args)
 {
 	var self= this;
-	
+	var doNothingFnc = function(){};
 	self.viewName = args.viewName;
-	self.postDigest = args.postDigest?args.postDigest:function(){};
-	self.preDigest = args.preDigest?args.preDigest:function(){};
+	
+	self.postDigest = args.postDigest?args.postDigest:doNothingFnc;
+	self.preDigest = args.preDigest?args.preDigest:doNothingFnc;
+	self.digestView = args.digestView?args.digestView:doNothingFnc;
 	
 	var fetchTemplate= function(digestView)
 	{
@@ -24,11 +26,11 @@ var KuaminikaView = function(args)
 		if(TemplateHolder[self.viewName])
 		{
 			self.preDigest();
-			args.digestView(TemplateHolder[self.viewName]);
+			self.digestView(TemplateHolder[self.viewName]);
 			self.postDigest();
 		}
 		
-			fetchTemplate(args.digestView);
+			fetchTemplate(self.digestView);
 	};
 	
 };

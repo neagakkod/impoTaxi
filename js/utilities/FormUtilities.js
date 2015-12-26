@@ -74,3 +74,84 @@ var KuaminikaDropDown = function(args)
 	};
 	
 };
+
+
+var FormModeMenu = function ()
+{
+	var self= this;
+
+	self.activated = false;
+	
+	self.container = null;
+	
+	self.addMenuItem = null;
+	self.updateMenuItem = null;
+	
+	self.addeModeHandler = function(){};
+	self.updateModeHandler = function(){};
+	
+	self.activate = function()
+	{
+		self.container = document.getElementById("formMenu");
+		if(self.container)
+		{
+			var addMenuItem = self.container.children[0];
+			var updateMenuItem = self.container.children[1];
+		
+			addMenuItem.onclick = self.addeModeHandler ;
+			updateMenuItem.onclick = self.updateModeHandler ;
+		
+			self.addMenuItem=$(addMenuItem);
+			self.updateMenuItem=$(updateMenuItem);
+			self.activated = true;
+		}	
+	};
+	
+	
+	self.activateMode = function(mode)
+	{
+			//set update or add mode
+		if(mode=="update")
+		{
+		
+			self.addMenuItem.removeClass("active");
+			//self.addMenuItem.hide();
+			self.updateMenuItem.addClass("active");
+			self.updateMenuItem.show();
+			
+		}
+		else
+		{
+			$(".currentlyInEdit").removeClass("currentlyInEdit");
+			self.addMenuItem.addClass("active");
+			self.addMenuItem.show();
+			self.updateMenuItem.removeClass("active");
+			self.updateMenuItem.hide();
+		}
+	};
+	
+};
+
+
+//Ajouter une semaine
+
+var FormTitleHolder = {
+  "IncomeForm":{"update":{"fr":"Modif. de Revenu"
+  						  ,"en":"Modify Income"
+  						  ,"kr":"Modifye Revni a"
+  						}
+  				,"add":{"fr":"Ajouter un Revenu"
+  						,"en":"Add Income"
+  						,"kr":"Ajoute yon Revni"
+  						}
+  				} 
+  ,"TimeRangeForm":{"update":{"fr":"Modif. de Revenu"
+  						  ,"en":"Modify Income"
+  						  ,"kr":"Modifye Revni a"
+  						}
+  				,"add":{"fr":"Ajouter une semaine"
+  						,"en":"Add week"
+  						,"kr":"Ajoute yon semèn"
+  						}
+  				} 
+};

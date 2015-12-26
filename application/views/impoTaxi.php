@@ -76,6 +76,8 @@
     <script src="js/plugins/bootstrap/bootstrap.min.js"></script>
  	<!-- moment.js JavaScript -->
     <script src="js/plugins/moment.js"></script>
+    <!-- numeral.js JavaScript -->
+    <script src="js/plugins/numeral.js"></script>
     <!-- datetimepicker JavaScript -->
     <script type="text/javascript" src="js/plugins/bootstrap-datetimepicker.js"></script>
 
