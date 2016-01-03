@@ -1,6 +1,75 @@
 // JavaScript Document
-
-	var ExpenseForm = function(options)
+var ExpenseForm = function(options)
+{
+	KuaminikaForm.call(this,options);
+	var self = this;
+	var superLoad= self.loadProcedure;
+	var carFinder = CarFinder(fetcher.Cars);
+	//var merchantFinder = 
+	
+	self.subject.merchant= ModelHolder.Merchant.get(self.subject.merchant_id);
+	
+	self.loadProcedure = function()
+	{
+		var whenAllCarsFound = function(allCars)
+		{
+			self.carDropdown.list=$.map(allCars,function(value,key){
+													 	return {chosenValue:key,chosenDisplay:value.name};
+													 });
+			var selectedCar = self.subject.car?self.subject.car:allCars[1];
+			self.carDropdown.initialValue = {chosenValue:selectedCar.id,chosenDisplay:selectedCar.name};
+			self.subject.car= selectedCar;
+			
+			self.merchantDropdown.list=$.map(ModelHolder.Merchant.map,function(value,key){
+													 	return {chosenValue:key,chosenDisplay:value.name};
+													 });
+			var selectedMerchant = self.subject.merchant ?self.subject.merchant: ModelHolder.Merchant.get(1);
+			self.merchantDropdown.initialValue = {chosenValue:selectedMerchant.id,chosenDisplay:selectedMerchant.name};
+			
+			
+			superLoad();
+			
+			var dtp=$("#expenseForm .date");
+			dtp.datetimepicker({format: 'YYYY-MM-DD'});
+			dtp.on("dp.change",function(e)
+			{
+				self.subject.date=e.date._d;
+			});
+			self.merchantDropdown.load();
+			self.carDropdown.load();
+		};
+		carFinder.findAll(whenAllCarsFound);
+	
+	};
+	
+	self.carDropdown = new KuaminikaDropDown({
+										 id:"expenseFormCarDropdown",
+										 reactToChoice:function(car_id)
+										 {
+										 	self.subject.car= ModelHolder["Car"].get(car_id);
+										 },
+										holder_id:"expenseForm_car_selector_holder"
+										});
+										
+										
+	self.merchantDropdown = new KuaminikaDropDown({
+										 id:"expenseFormMerchantDropdown",
+										 reactToChoice:function(merchant_id)
+										 {
+										 	self.subject.merchant= ModelHolder["Merchant"].get(merchant_id);
+										 	self.subject.merchant_id= self.subject.merchant.id;
+										 },
+										holder_id:"expenseForm_merchant_selector_holder"
+										});
+	
+};
+ExpenseForm.prototype = (function() {
+  var Base = function() {};
+  Base.prototype = KuaminikaForm.prototype;
+  return new Base();
+}());
+ExpenseForm.prototype.constructor = ExpenseForm;
+/*	var ExpenseForm = function(options)
 	{
 		var self= this;
 		var cars= options.carList;
@@ -104,4 +173,4 @@
 			self.updateMenuItem=$(updateMenuItem);
 			self.activateMode(options.action);
 		};
-	};
+	};*/

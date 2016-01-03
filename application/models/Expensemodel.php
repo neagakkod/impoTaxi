@@ -57,6 +57,8 @@ class ExpenseModel extends CI_Model
 	
 	protected function deleteExpense($id)
 	{
+	
+		$this->db->delete('ExpenseTax', array('expense_id' => $id)); 
 		$this->db->delete('Expense', array('id' => $id)); 
 		return $this->db->affected_rows();
 	}

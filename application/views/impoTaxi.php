@@ -53,20 +53,30 @@
 	</nav>
 		
 	<div id="wrapper" class="col-md-11">
-		
-		<div id="leftPart" class="col-md-8">
+		<div id="middleMenu" class="row">
+			 <div class="col-md-offset-9">
+			 	<button id = "launchAddSubject"  type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus "></span> AJOUTER </button> 
+			 	<button id = "launchRptBtn"  type="button" class="btn btn-primary"><span class="glyphicon glyphicon-file"></span> RAPPORT</button>
+			 </div>
+			 <hr></hr>
+		</div>
+		<div id="centerStage" class="row">
+			
+		</div>
+		<div id="modalStage" class="modal " style="display: none;width:50%;margin:2% auto "></div>
+	<!--	<div id="leftPart" class="col-md-8">
 		
 		</div>	
 		<div id="rightPart" class="col-md-4">
 			
-		</div>
+		</div>-->
 	</div>
 	<div id="sideMenu" class="col-md-1">
 		
 			<div><h2 class="add">Place for btns!</h2></div>
 	</div>
 
-
+	
     
   
  	<!-- jQuery -->
@@ -104,6 +114,7 @@
     <!-- Models -->
     <script src="js/utilities/ModelUtilities.js"></script>
 	<script src="js/Models/TaxAndInsurance.js"></script>
+    <script src="js/Models/Merchant.js"></script>
     <script src="js/Models/Car.js"></script>
 	<script src="js/Models/Expense.js"></script>
 	<script src="js/Models/Individuals.js"></script>

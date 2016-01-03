@@ -6,7 +6,7 @@ var TimeRangeForm = function (options)
 	var superLoad= self.loadProcedure;
 	var driverFinder = new ModelFinder(fetcher["Drivers"],"Driver");
 	self.deleteBtnProcedure = options.deleteBtnProcedure;
-
+	self.loadAddIncomeBtnProcedure = options.loadAddIncomeBtnProcedure;
 	
 	var performAddWeek = function ()
 	{	
@@ -73,10 +73,13 @@ var TimeRangeForm = function (options)
  		var deleteWeekBtn = self.form_container.getElementsByClassName("deleteSubjectButton")[0];	
  		deleteWeekBtn.onclick = self.deleteBtnProcedure;
  		
+ 		var addIncomeForWeekBtn= self.form_container.getElementsByClassName("addIncomeForWeekBtn")[0];
+ 		addIncomeForWeekBtn.onclick = self.loadAddIncomeBtnProcedure;
+ 		
  		self.deleteBtn = $(deleteWeekBtn);
 		self.updateBtn=$(updateWeekBtn);
 		self.addBtn=$(addWeekBtn);
-		
+		self.addIncomeForWeekBtn = $(addIncomeForWeekBtn);
 		self.activateMode(self.operation);
 	};
 	
@@ -94,6 +97,7 @@ var TimeRangeForm = function (options)
 		}
 		else
 		{
+			self.addIncomeForWeekBtn.hide();
 			self.deleteBtn.hide();
 			self.updateBtn.hide();
 			self.addBtn.show();	

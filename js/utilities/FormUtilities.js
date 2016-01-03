@@ -145,9 +145,9 @@ var FormTitleHolder = {
   						,"kr":"Ajoute yon Revni"
   						}
   				} 
-  ,"TimeRangeForm":{"update":{"fr":"Modif. de Revenu"
-  						  ,"en":"Modify Income"
-  						  ,"kr":"Modifye Revni a"
+  ,"TimeRangeForm":{"update":{"fr":"Modif. de Semaine"
+  						  ,"en":"Modify Week"
+  						  ,"kr":"Modifye semèn la"
   						}
   				,"add":{"fr":"Ajouter une semaine"
   						,"en":"Add week"

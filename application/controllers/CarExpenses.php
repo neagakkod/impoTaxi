@@ -17,6 +17,15 @@ class CarExpenses extends CI_Controller
 		echo json_encode($data['expenses'] );
 	}
 	
+	public function getForTimeRange()
+	{
+		$timeRange=  $this->input->post();	
+		
+		$expenses=$this->Carexpensemodel->get_ExpenseForTimeRange($timeRange);
+		$data['expenses'] = $expenses;
+		
+		echo json_encode($data['expenses'] );
+	}
 	public function update()
 	{
 		$expense = $this->input->post();	

@@ -4,23 +4,20 @@
 var ExpenseController= function(viewset)
 {
 	var self= this;
+	
+	var _gridViewName ="nonEditable_expenseGrid"; 
+	var _editViewName = "editExpense";
+	var mainContainer_id = "centerStage";
+	var editFormContainer_id = "modalStage";
+	var topMenuContainer_id = "middleMenu";
+	
+
 	var finder ={ 
 				expenses:CarExpenseFinder(fetcher.CarExpenses),
 				cars:CarFinder(fetcher.Cars)
 				};
 
-
-	self.update= function()
-	{
-		var convertedInstance= self.form.expense;
-			convertedInstance.raw_date=convertedInstance.date.getTime();
-			convertedInstance.amount=convertedInstance.subTotal;
-		$.post(fetcher.CarExpenses.update,convertedInstance,function(data)
-		{
-			console.log(data);
-				self.grid.updateRow(convertedInstance);
-		});
-	};
+	var ceCreator= new ModelCreator("CarExpense");
 	self.add=function(newExpense)
 	{
 		var convertedInstance= newExpense? newExpense:CarExpenseCreator.createBlank();
@@ -34,6 +31,18 @@ var ExpenseController= function(viewset)
 		});
 	};
 	
+	self.update= function()
+	{
+		var convertedInstance= self.form.subject;
+			convertedInstance.raw_date=convertedInstance.date.getTime();
+			convertedInstance.amount=convertedInstance.subTotal;
+		$.post(fetcher.CarExpenses.update,convertedInstance,function(data)
+		{
+			console.log(data);
+				self.grid.reload();
+		});
+	};
+
 	
 	self.delete= function(id,doClientDelete)
 	{
@@ -43,80 +52,101 @@ var ExpenseController= function(viewset)
 			if(data.success)
 			{
 			
-				if(self.form.expense.id==id)
+				if(self.form.subject.id==id)
 				{
-					self.form.expense=null;
+					self.form.subject=null;
 				}
 				doClientDelete();
 			}
 		});
 	};
-	self.show=function()
-	{
-		finder.cars.findAll(function(cars){
-			
-			finder.expenses.findAll(function(expenses)
-			{ 
-			
-				self.grid.data=expenses;
-				self.grid.addBtnId="addExpenseButton";
-				$("#leftPart").append(self.grid.load());
-				self.grid.listenAndprocessChange();
-				self.grid.activateDateTimePickers();
-				self.grid.activateUpdateButtons("editExpenseButton");
-				self.grid.activateDeleteButtons("deleteExpenseButton");
-			});
-		});
-	};
 	
-	self.loadExpenseToEdit= function(id)
-	{
-		console.log("thd");
-		console.log(this);
-		var expense_id=parseInt(this.id.split("_")[1]);
-		var editMe=$.grep(CarExpenseHolder.carExpenses,function(expense)
-		{
-			return expense.id==expense_id;
-			
-		})[0];
-		$(".currentlyInEdit").removeClass("currentlyInEdit");
-		$("#"+expense_id).addClass("currentlyInEdit");
-		self.showForm(editMe);
-	};
 	
-	self.showForm= function(currentEx)
-	{
-		finder.cars.findAll(function(cars)
-		{
-			finder.expenses.findAll(function(expenses)
-			{ 
-				self.form= new ExpenseForm({
-					template:viewset.expense,
-					expense:currentEx?currentEx:CarExpenseCreator.createBlank(),
-					carList:cars,
-					action:currentEx?"update":"add",
-					expenseList:expenses,
-					updateBtnProcedure:function(editMe)
-					{
-						self.update(editMe);
-						self.showForm();
-					},
-					addBtnProcedure:function(newEx)
-					{
-						self.add(newEx);
-						self.showForm();
-					}
-				});
-				self.form.load("rightPart");
-			});
-		});
-	};
-	self.grid=new  KuaminikaGrid({gridID:"expenseTable",
+	
+	
+	self.grid = new  KuaminikaGrid({gridID:"expenseTable",
+											viewName:_gridViewName,
+									     	gridHolderId:mainContainer_id//"leftPart"
+													});
+	
+	self.topMenuContainer = document.getElementById(topMenuContainer_id);
+	
+	self.formContainer = 	$("#"+editFormContainer_id);
+	self.form = new ExpenseForm({viewName:_editViewName
+								,holderId:editFormContainer_id//"rightPart"
+								,subject:ceCreator.createBlank()
+								,subjectType:"CarExpense"
+								,addBtnProcedure:function(newEx)
+								{
+									self.add(newEx);
+									loadAddExpenseForm();
+									self.formContainer.modal("hide"); 
+									//loadAddExpenseForm();
+								}
+								,updateBtnProcedure:self.update
+								
+								
+								});
+								
+/*	self.grid=new  KuaminikaGrid({gridID:"expenseTable",
 								  template:viewset.expenses,
 								  blnkElmFunction:CarExpenseCreator.createBlank,
 								  actionBeforeDelete:self.delete,
 								  actionBeforeUpdate:self.update,
 								  NoControllerActionNeeded:false,
 								  loadElementFunction:self.loadExpenseToEdit
-								});
+								});*/
+	var activateTopMenu = function()
+	{
+		var launchAddFormBtn = document.getElementById("launchAddSubject");
+		launchAddFormBtn.onclick=function()
+		{	self.formContainer.modal("show"); 
+			loadAddExpenseForm();
+		};
+		launchAddFormBtn.style.display="";
+		var launchRptBtn = document.getElementById("launchRptBtn");
+		launchRptBtn.onclick = function()
+		{
+			open("http://kuaminika.com/dev/impotaxi/trunk/index.php/HomePage/pdf","_blank");
+		};
+	};
+
+	var loadAddExpenseForm = function()
+	{
+	
+		self.form.subject=ceCreator.createBlank();
+		self.form.operation = "add";
+		self.form.load();
+	};							
+								
+	self.showAllExpensesForTrimester = function(trimester_id)
+	{
+		var currentTrimester = CurrentInfo.trimester;
+		
+		
+		var doWhenFound = function(expenses)
+		{
+			self.grid.data= expenses;
+			self.grid.loadElement = function()
+											{
+									     	  	var subject_id = this.id.split("_")[1];
+									     	 	self.form.subject = ModelHolder["CarExpense"].get(subject_id);
+									     	 	self.form.operation = "update";
+									     	 	self.form.load();
+									     	 	self.grid.markRowAsSelected(subject_id);
+									     	  };
+			self.grid.actionBeforeDelete = self.delete;
+			self.grid.load();
+			console.log(expenses);
+		};
+		finder.expenses.findAllForTimeRange(currentTrimester,doWhenFound);
+	
+	};
+
+	self.init=function()
+	{
+		self.showAllExpensesForTrimester(CurrentInfo.trimester.id);
+		activateTopMenu();
+		//loadAddExpenseForm();
+	};
 };

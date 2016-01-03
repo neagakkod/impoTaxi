@@ -7,6 +7,8 @@ var IncomeController = function(args){
 		var _gridViewName ="incomeGrid"; 
 		var _editViewName = "editIncome";
 		var _editWeekName = "editWeek";
+		var editFormContainer_id = "modalStage";
+		var mainContainer_id = "centerStage";
 		
 		var data ={} ;
 		var wIncomeCreator = new ModelCreator("WeeklyIncome");
@@ -16,11 +18,7 @@ var IncomeController = function(args){
 		
 		
 		
-		self.weekListView =  new  KuaminikaView({viewName:_weekListViewName});
-		self.gridView = new  KuaminikaGrid({gridID:"incomeTable",
-											viewName:_gridViewName,
-									     	gridHolderId:"income_viewFloor"
-													});
+	
 		var loadAddIncomeFormForWeek = function(week_id)
 		{
 			self.incomeForm.subject=wIncomeCreator.createBlank();
@@ -38,9 +36,37 @@ var IncomeController = function(args){
 			self.weekForm.load();
 		};
 		
-
+		var activateTopMenu = function()
+		{
+			var launchAddFormBtn = document.getElementById("launchAddSubject");
+			launchAddFormBtn.style.display="none";
+			/*launchAddFormBtn.onclick=function()
+			{	self.formContainer.modal("show"); 
+				loadAddIncomeFormForWeek();
+			};*/
+			
+			
+			
+			var launchRptBtn = document.getElementById("launchRptBtn");
+			launchRptBtn.onclick = function()
+			{
+				open("http://kuaminika.com/dev/impotaxi/trunk/index.php/HomePage/pdf","_blank");
+			};
+		};
+		
+		self.addIncomeFormContainer = 	$("#"+editFormContainer_id);
+		self.weekListView =  new  KuaminikaView({viewName:_weekListViewName});
+		self.gridView = new  KuaminikaGrid({gridID:"incomeTable",
+											viewName:_gridViewName,
+									     	gridHolderId:"income_viewFloor"
+													});
 		self.weekForm = new TimeRangeForm({viewName:_editWeekName
 											,subject:wCreator.createBlank()
+				      						,loadAddIncomeBtnProcedure:function()
+				      						{
+				      								self.addIncomeFormContainer.modal("show"); 
+													loadAddIncomeFormForWeek(self.weekForm.subject.id);
+				      						}
 				      						,addBtnProcedure:function()
 											{
 												ModelHolder["Week"].add(self.weekForm.subject);
@@ -80,7 +106,7 @@ var IncomeController = function(args){
 											}
 										});
 		self.incomeForm = new IncomeForm({viewName:_editViewName,
-									holderId:"rightPart",
+									holderId:editFormContainer_id,//"rightPart",
 									subject:wIncomeCreator.createBlank(),
 									subjectType:"WeeklyIncome",
 									addBtnProcedure:function(weeklyIncome)
@@ -93,6 +119,7 @@ var IncomeController = function(args){
 											
 											self.displayIncomesForWeek(week_id);
 											loadAddIncomeFormForWeek(week_id);
+												self.addIncomeFormContainer.modal("hide"); 
 										});
 									},
 									updateBtnProcedure:function(weeklyIncome)
@@ -172,8 +199,8 @@ var IncomeController = function(args){
 				var	weekelyIncomeView = new  KuaminikaView({viewName:_viewName,
 														    digestView:function(template)
 																	   {
-															   				$("#leftPart").html(template(data));
-															   				
+															   				//$("#leftPart").html(template(data));
+															   				$("#"+mainContainer_id).html(template(data));
 															   				self.weekListView.digestView=function(template)
 																										 {
 																										 	$("#weekListContainer").html(template(data));
@@ -192,7 +219,7 @@ var IncomeController = function(args){
 																										 		var weekListBtns = document.getElementsByClassName("weeksInMonth");
 																								   				$.each(weekListBtns,function()
 																								   				{ 
-																								   					$.each(this.children,function()
+																								   					$.each(this.getElementsByTagName("li"),function()
 																								   					{
 																									   					this.onclick= function()
 																									   					{
@@ -222,7 +249,7 @@ var IncomeController = function(args){
 		self.init= function()
 		{
 			self.displayWeeklyIncomesForTrimester(CurrentInfo.trimester.id);
-			
+			activateTopMenu();
 		};
 		
 	

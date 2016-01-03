@@ -1,10 +1,10 @@
 {{#list}}
-	<a class="btn btn-success btn-xs loadAddWeekBtn" data-month_id="{{month_id}}"><span class="glyphicon glyphicon-plus "></span></a>
+
     <nav class="nav-sidebar">
-		<ul class="nav tabs weeksInMonth">{{writeMonth month_id}}  	
+		<ul style="margin-left: 7px;font-size: 24px" class="nav tabs weeksInMonth">{{writeMonth month_id}}  		<a class="btn btn-success btn-xs loadAddWeekBtn pull-right"  data-month_id="{{month_id}}"><span class="glyphicon glyphicon-plus "></span></a>
 		 {{#weeks}}
-          <li id="week{{id}}" data-id={{id}} class="">
-          	<a href="#tab2" data-toggle="tab">{{formatDateInc date_start}} to {{formatDateInc date_end}}</a> 
+          <li id="week{{id}}" data-id={{id}} >
+          	<a href="#tab2" data-toggle="tab" style="font-size: 15px">{{formatDateInc date_start}} to {{formatDateInc date_end}}</a> 
          
           </li>
          {{/weeks}}

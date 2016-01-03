@@ -58,25 +58,33 @@ var CarFinder= function(addressFetcher)
 {
 	var self = {};
 	
+	
+	var preFoundProcedure = function(rawCars,dowhenfound)
+	{
+		rawCars=JSON.parse(rawCars);
+		 	var rslt= 	$.map(rawCars,function(rawCar)
+				{
+					return CarCreator.createLightFromRaw(rawCar);
+				});
+			ModelHolder.Car.updateMapWithArray(rslt);
+
+			dowhenfound(ModelHolder.Car.map);
+	};
+	
+	
 	self.fetcher = addressFetcher;
+	
 	self.findAll = function(dowhenfound)
 	{
-		if(ModelHolder.Car.length>0)
+		if(ModelHolder.Car.size()>0)
 		{
-			dowhenfound(ModelHolder.Car);
+			dowhenfound(ModelHolder.Car.map);
 		}
 		else
 		{
 			$.get(self.fetcher.getAll,function(rawCars)
 			{
-				rawCars=JSON.parse(rawCars);
-			 	var rslt= 	$.map(rawCars,function(rawCar)
-					{
-						return CarCreator.createLightFromRaw(rawCar);
-					});
-				
-				ModelHolder.Car= rslt;
-				dowhenfound(ModelHolder.Car);
+				preFoundProcedure(rawCars,dowhenfound);
 			});
 		}
 	};

@@ -10,8 +10,15 @@ var MenuBarController= function(args)
 								"income":"IncomeController"
 								,"expense":"ExpenseController"
 							};
+		self.initiatedController = null;	
+	$.each(expenseIncomeToggler.children,function()
+	{
+		if(this.classList.contains("active"))
+	    	self.initiatedController = new window[ControllerOptions[this.dataset.option]];
+		
+	});
 	
-	self.initiatedController = null;						
+					
 	var RegisteredDropdown = function (args){
 		
 		/*
@@ -75,20 +82,23 @@ var MenuBarController= function(args)
 												   label:"Year",
 												   reactToChoice:function(choice)
 												   {
-												   	 	CurrentInfo.year=choice;
+												   	 	CurrentInfo.year=new Year({id:choice});//choice;
+												   	 		if(self.initiatedController)
+													   	 		self.initiatedController.init();
+												   	 	
 												   }});
-			yearDropdown.valueHolder.innerHTML="Year"+":"+CurrentInfo.year;
+			yearDropdown.valueHolder.innerHTML="Year"+":"+CurrentInfo.year.name;
 			
 		var trimesterDropdown = new RegisteredDropdown({id:"trimesterDropdown",
 													   label:"Trimester",
 													   reactToChoice:function(choice)
 													   {
-													   	 	CurrentInfo.trimester=TrimesterList[choice];
+													   	 	CurrentInfo.trimester=CurrentInfo.year.trimesters[choice-1];//TrimesterList[choice];
 													   	 	if(self.initiatedController)
 													   	 		self.initiatedController.init();
 													   }});
 			trimesterDropdown.valueHolder.innerHTML="Trimester"+":"+CurrentInfo.trimester.name;
-			
+				self.initiatedController.init();
 		logOutBtn.onclick= function()
 		{
 			$.get(fetcher.Login.logout,function(rslt){

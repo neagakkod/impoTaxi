@@ -1,28 +1,7 @@
 // JavaScript Document
 
-var currentLanguage = "fr"
-var TimeCalculator= function ()
-{
-	var self=this;
-	self.difference=-1;
-	self.click= function()
-	{
-		if(!self.startTime)
-		{
-			self.startTime= new Date();
-			return;
-		}
-		var endTime= new Date();
-		self.difference= endTime-self.startTime;
-	};
-	
-	self.disPlayDiff=function()
-	{
-		var rslt= (self.difference/1000) +" s ";
-		self.difference=-1;
-		return rslt;
-	};
-};
+var currentLanguage = "fr";
+var taxRates = {tps:0.05,tvq:0.09975}
 //---
 var LaunchAdressFetcher = function(callback){
 	return $.get("index.php/FetcherAddresses",callback);
@@ -38,11 +17,14 @@ var isOnLoginPage = location.pathname.indexOf("/login.php")>0;
 
 
 ////
-var currentDate = new Date();
-var CurrentInfo = {"year":currentDate.getFullYear()
-				  ,"trimester":!isOnLoginPage?TrimesterList[Math.ceil(currentDate.getMonth()/3)]:-1
+
+var CurrentInfo = function()
+				{ var currentDate = new Date();
+					var currentYear = new Year({id:currentDate.getFullYear()});
+				 return {"year":currentYear//currentDate.getFullYear()
+				  ,"trimester":!isOnLoginPage?currentYear.trimesters[Math.ceil(currentDate.getMonth()/3)]:1//TrimesterList[Math.ceil(currentDate.getMonth()/3)]:-1
 				  ,"date":currentDate
-				  };
+				  }}();
 
 ///
 

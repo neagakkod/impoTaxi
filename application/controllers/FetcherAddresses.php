@@ -15,7 +15,8 @@ class FetcherAddresses extends CI_Controller
 		$data['FetcherAddresses'] = array("CarExpenses"=>array("getAll"=>"index.php/CarExpenses/",
 															   "add"=>"index.php/CarExpenses/add",
 															   "delete"=>"index.php/CarExpenses/delete/",
-															   "update"=>"index.php/CarExpenses/update"
+															   "update"=>"index.php/CarExpenses/update",
+															   "getForTimeRange"=>"index.php/CarExpenses/getForTimeRange"
 															),
 											"Cars" =>array("getAll"=>"index.php/Cars/"),
 											"Login"=>array("authenticate"=>"index.php/Login/authenticate",

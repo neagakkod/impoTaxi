@@ -64,21 +64,60 @@ var Month= function(args)
 }
 /*
 args={
-	id,name
+	id:2014//req
+	,name:"2014"//op
+	,monthList:[] //arrayOfMonths op
 }
 */
 var Year= function(args)
 {
 	var self = this;
+	
 	self.id= args.id;
-	self.name= args.name;
-	self.months=[];
-	self.date_start=self.months[0].date_start;
-	self.date_end =self.months[self.weeks.length-1].date_start;
+	self.name= args.name?args.name:args.id;
+	
+	TimeRange.call(this,args);
+	self.months=args.monthList;
+	
+	
+	self.date_start=self.months?self.months[0].date_start:new Date(self.id+"-01-01");
+	self.date_end =self.months?self.months[self.weeks.length-1].date_end:new Date(self.id+"-12-31");
+
+	
 	self.trimesters=[];
+
 	var generateTrimesters=function()
 	{
-		//groupment of months into three
-	}
-	TimeRange.call(this);
-}
+		self.trimesters=$.map(TrimesterList,function(v,k)
+			{
+				v.year_id=self.id;
+				return new Trimester(v);	
+			});
+	};
+	
+	generateTrimesters();
+	
+	self.changeId = function(new_id)
+	{
+		self.id= new_id;
+		generateTrimesters();
+	};
+};
+/*
+
+args:{id:1,month_ids:[1,2,3],name:"Jan, Feb, Mar",year_id:2015}
+*/
+var Trimester = function(args)
+{
+	var self = this;
+
+	TimeRange.call(this,args);
+	self.id= args.id;
+	self.name= args.name;
+	self.month_ids= args.month_ids;
+	
+	self.date_start = new Date(args.year_id+"-"+args.month_ids[0]+"-1");
+	self.date_end = new Date(args.year_id+"-"+args.month_ids[2]+"-31");
+	
+	
+};

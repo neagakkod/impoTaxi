@@ -17,6 +17,16 @@ class CarExpenseModel extends ExpenseModel
 			return $query->row_array();
 	}
 	
+	public function get_ExpenseForTimeRange($timeRange)
+	{
+		$data = array("raw_date>="=>$timeRange["raw_date_start"]
+					 ,"raw_date<="=>$timeRange["raw_date_end"]);
+	/*	$this->db->where('order_date >=', $first_date);
+		$this->db->where('order_date <=', $second_date);
+		return $this->db->get('orders');*/
+			$query = $this->db->get_where('CarExpenseView', $data);
+			return $query->result_array();
+	}
 	private function getMaxId()
 	{
 		$this->db->select_max('id');
@@ -75,4 +85,3 @@ class CarExpenseModel extends ExpenseModel
 
 */
 ?>
-

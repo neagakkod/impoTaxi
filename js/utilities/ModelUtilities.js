@@ -31,14 +31,19 @@ var IdentityMap = function(){
 
 
 var ModelHolder = {
-	car:new IdentityMap(),
-	carExpense:new IdentityMap(),
+	Car:new IdentityMap(),
+	CarExpense:new IdentityMap(),
 	WeeklyIncome:new IdentityMap(),
 	taxInsurances:new IdentityMap(),
 	timeRanges_Months:new IdentityMap(),
 	Week:new IdentityMap(),
-	Driver:new IdentityMap()
+	Driver:new IdentityMap(),
+	Merchant: new IdentityMap()
 };
+
+
+
+	
 var DriverStatus = {"1":{"fr":"disponible","en":"available","kr":"lib","id":1},
 					"2":{"fr":"malade","en":"sick","kr":"malad","id":2},
 					"3":{"fr":"panne","en":"car breakdown","kr":"pann","id":3},
@@ -65,7 +70,30 @@ var TrimesterList = {
 	"2":{id:2,month_ids:[4,5,6],name:"Apr, May, Jun"},
 	"3":{id:3,month_ids:[7,8,9],name:"Jul, Aou, Sept"},
 	"4":{id:4,month_ids:[10,11,12],name:"Oct, Nov, Dec"}
-}
+};
+
+var TimeCalculator= function ()
+{
+	var self=this;
+	self.difference=-1;
+	self.click= function()
+	{
+		if(!self.startTime)
+		{
+			self.startTime= new Date();
+			return;
+		}
+		var endTime= new Date();
+		self.difference= endTime-self.startTime;
+	};
+	
+	self.disPlayDiff=function()
+	{
+		var rslt= (self.difference/1000) +" s ";
+		self.difference=-1;
+		return rslt;
+	};
+};
 var ModelCreator= function(ModelType)
 {
 	var self= this;
@@ -107,7 +135,7 @@ var ModelFinder= function(addressFetcher,ModelType)
 	{
 		fetchType=fetchType?fetchType:"getAll";
 
-		if(ModelHolder[ModelType].length>0)
+		if(ModelHolder[ModelType].size()>0)
 		{
 			dowhenfound(ModelHolder[ModelType]);
 		}
@@ -127,18 +155,16 @@ var ModelFinder= function(addressFetcher,ModelType)
 		}
 	};
 	
-	self.findAllBasedOnParams = function(dowhenfound,params)
+	self.findAllBasedOnParams = function(params)
 	{
 		/*
 		params:{
-			action:"",
-			 id:0
-			
+			 id:0,
+			 dowhenfound:function(){}//req
+			 posting:{}//optional
 		}
 		*/
 
-		if(params)
-		{
 			if(ModelHolder[ModelType].length>0)
 			{
 				dowhenfound(ModelHolder[ModelType]);
@@ -162,10 +188,7 @@ var ModelFinder= function(addressFetcher,ModelType)
 				else
 					dowhenfound(ModelHolder[ModelType]);
 			}
-		}
-		else
-			dowhenfound(ModelHolder[ModelType]);
-
+	
 	};
 	
 	self.findAllLight = function(dowhenfound,fetchType)

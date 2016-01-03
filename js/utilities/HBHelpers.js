@@ -12,14 +12,14 @@ Handlebars.registerHelper('calculateTotal', function(expenses)
 
 Handlebars.registerHelper('calculateTps', function(subtotal) 
 {
-  var result =(parseFloat(subtotal)*0.05);
+  var result =(parseFloat(subtotal)*taxRates.tps);
   return Math.round(result * 100) / 100;
 });
 
 Handlebars.registerHelper('calculateTvq', function(subtotal) 
 {
   var tps= Handlebars.helpers.calculateTps(subtotal);
-  var result = ((tps+parseFloat(subtotal))*0.10);
+  var result = parseFloat(subtotal)*taxRates.tvq;//((tps+parseFloat(subtotal))*taxRates.tvq);
   return Math.round(result * 100) / 100;
 });
 

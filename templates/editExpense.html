@@ -1,9 +1,9 @@
 
 
-{{#expense}}
-<ul class="nav nav-tabs" id="expenseFormMenu">
+
+<ul class="nav nav-tabs" id="formMenu">
   <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-plus"></span> Add Expense</a></li>
-  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-edit"></span>Modift Expense</a></li>
+  <li role="presentation" style="display: none"><a href="#"><span class="glyphicon glyphicon-edit"></span>Modift Expense</a></li>
 </ul>
 <form id="expenseForm" class="form-horizontal" role="form">
 
@@ -20,17 +20,14 @@
      </div>
      <div class="form-group">
 	     <label class="control-label col-sm-3" for="expense_car">car:</label>
-	     <div class="col-sm-9">
-	   		<select class="car_id_selector" data-property="car_id">
-        		{{{LoadCarDropDownOptions  car }}}
-        	</select>
+	     <div id="expenseForm_car_selector_holder" class="col-sm-9">
 	      
 	     </div>
      </div>
      <div class="form-group">
 	     <label class="control-label col-sm-3" for="expense_merchant">merchant:</label>
-	     <div class="col-sm-9">
-	       <input type="text" class="form-control" id="expense_merchant" name="merchant" placeholder="merchant">
+	     <div id="expenseForm_merchant_selector_holder" class="col-sm-9">
+	       
 	     </div>
 	 </div>
 	 <div class="form-group">
@@ -47,9 +44,8 @@
      </div>
      <div class="form-group">        
       <div class="col-sm-offset-10 col-sm-2">
-        <a id="addExpenseButton"  class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span></a>
-        <a id="updateExpenseButton" style="display: none" class="btn btn-primary" ><span class="glyphicon glyphicon-save"></span></a>
+        <a id="addSubjectButton"  class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span></a>
+        <a id="updateSubjectButton" style="display: none" class="btn btn-primary" ><span class="glyphicon glyphicon-save"></span></a>
       </div>
     </div>
 </form>
-{{/expense}}

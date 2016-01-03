@@ -6,9 +6,9 @@
             <th style="width:15%">Merchant</th>
             <th style="width:13%">Reason</th>
             <th style="width:10%">Subtotal</th>
-            <th class="smallCol">TPS</th>
-            <th class="smallCol">TVQ</th>
-            <th class="smallCol">total</th>
+            <th class="">TPS</th>
+            <th class="">TVQ</th>
+            <th class="">total</th>
         </tr>
     </thead>
     <tbody>
@@ -21,16 +21,16 @@
             {{car.name}}
             </td>
              <td>
-            	
+            	{{merchant.name}}
             	
             </td>
             <td>{{reason}}</td>
-            <td>{{subTotal}}</td>
-            <td>{{calculateTps subTotal}}</td>
-            <td>{{calculateTvq subTotal}}</td>
-            <td>{{calculateTaxInc subTotal}}</td>
-            <td><a id="udpate_{{id}}" class="btn btn-primary   editExpenseButton"><span class="glyphicon glyphicon-edit"></span></a></td>
-            <td><a class="btn btn-danger  deleteExpenseButton"><span class="glyphicon glyphicon-remove"></span></a></td>
+            <td>{{writeAsMoney subTotal}}</td>
+            <td>{{writeAsMoney (calculateTps subTotal)}}</td>
+            <td>{{writeAsMoney (calculateTvq subTotal)}}</td>
+            <td>{{writeAsMoney (calculateTaxInc subTotal)}}</td>
+            <td class="smallCol"><a id="udpate_{{id}}" class="btn btn-primary btn-xs  updateSubjectBtn"><span class="glyphicon glyphicon-edit"></span></a></td>
+            <td class="smallCol"><a class="btn btn-danger btn-xs  deleteSubjectBtn"><span class="glyphicon glyphicon-remove"></span></a></td>
    
         </tr>
         {{/list}}
@@ -40,10 +40,10 @@
     	<th colspan="4"></th> 
        <!-- <th></th> 
         <th></th>-->
-        <th>{{calculateTotal list}}</th> 
-        <th>{{calculateTps (calculateTotal list)}}</th> 
-        <th>{{calculateTvq (calculateTotal list)}}</th> 
-        <th>{{calculateTaxInc (calculateTotal list)}}</th>
+        <th>{{writeAsMoney (calculateTotal list)}}</th> 
+        <th>{{writeAsMoney (calculateTps (calculateTotal list))}}</th> 
+        <th>{{writeAsMoney (calculateTvq (calculateTotal list))}}</th> 
+        <th>{{writeAsMoney (calculateTaxInc (calculateTotal list))}}</th>
        
     </tr>
   </tfoot>

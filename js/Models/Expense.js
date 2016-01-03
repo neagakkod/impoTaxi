@@ -27,6 +27,7 @@ var CarExpenseCreator=
 		rslt.subTotal=parseFloat(raw.amount);
 		rslt.car= CarCreator.createLight(raw.car_id,raw.car_name);
 		rslt.merchant_id=1;
+		rslt.merchant = ModelHolder.Merchant.get(rslt.merchant_id);
 		return rslt;
 	},
 	createBlank: function()
@@ -40,6 +41,21 @@ var CarExpenseFinder= function(addressFetcher)
 	var self = {};
 	
 	self.fetcher = addressFetcher;
+	
+	var preFoundProcedure = function(rawExpenses,dowhenfound)
+		{
+			rawExpenses=JSON.parse(rawExpenses);
+			 	var rslt= 	$.map(rawExpenses,function(rawExpense)
+					{
+						return CarExpenseCreator.createFromRaw(rawExpense);
+					});
+				ModelHolder.CarExpense.updateMapWithArray(rslt);
+	
+				dowhenfound(rslt);
+		}
+	
+	
+	
 	self.findAll = function(dowhenfound)
 	{
 		if(CarExpenseHolder.carExpenses.length>0)
@@ -50,19 +66,21 @@ var CarExpenseFinder= function(addressFetcher)
 		{
 			$.get(self.fetcher.getAll,function(rawExpenses)
 			{
-				rawExpenses=JSON.parse(rawExpenses);
-			 	var rslt= 	$.map(rawExpenses,function(rawExpense)
-					{
-						return CarExpenseCreator.createFromRaw(rawExpense);
-					});
-				
-				CarExpenseHolder.carExpenses= rslt;
-				dowhenfound(CarExpenseHolder.carExpenses);
+				preFoundProcedure(rawExpenses,dowhenfound);
 			});
 		}
 	};
 	
-	
+	self.findAllForTimeRange = function(timeRange, doWhenFound)
+	{
+		
+		timeRange.raw_date_end=timeRange.date_end.getTime();
+		timeRange.raw_date_start=timeRange.date_start.getTime();
+		$.post(fetcher.CarExpenses.getForTimeRange,timeRange,function(rawExpenses)
+		{
+			preFoundProcedure(rawExpenses,doWhenFound);
+		});
+	}
 	return self;
 
 };

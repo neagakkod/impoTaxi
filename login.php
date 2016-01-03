@@ -56,8 +56,14 @@
     <script src="js/plugins/handlebars-v4.0.4.js"></script>
 	
 	<!-- Utilities -->
+    <script src="js/utilities/PrototypeAdditions.js"></script>
     <script src="js/utilities/KuaminikaAuthenticator.js"></script>
     <script src="js/utilities/Fetcher.js"></script>
+    <script src="js/utilities/ModelUtilities.js"></script>
+   
+     <!-- Models -->
+	<script src="js/Models/TimeRanges.js"></script>
+    <script src="js/Models/Merchant.js"></script>
    
    	<!-- controllers -->
     <script src="js/Controllers/LoginController.js"></script>

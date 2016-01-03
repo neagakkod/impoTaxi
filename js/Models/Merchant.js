@@ -4,59 +4,29 @@ var Merchant = function()
 {
 	var self= this;
 		self.name="";
-		self.id;
+		self.id=-1;
 		
 };
-
 
 var MerchantCreator= 
 {
 	createFromRaw:function(raw)
 	{
-		var rslt= new CarExpense();
+		var rslt= new Merchant();
 		rslt.date= new Date(parseInt(raw.raw_date));
 		rslt.id=raw.id;
-		rslt.reason=raw.reason;
-		rslt.subTotal=parseFloat(raw.amount);
-		rslt.car= CarCreator.createLight(raw.car_id);
-		//rslt.merchant
+		rslt.name=raw.name;
 		return rslt;
 	},
 	createBlank: function()
 	{
-	 return new CarExpense(CarCreator.createBlank());
+	 return new Merchant();
 	}
-}
-
-var CarExpenseFinder= function(addressFetcher)
-{
-	var self = {};
-	
-	self.fetcher = addressFetcher;
-	self.findAll = function(dowhenfound)
-	{
-		if(CarExpenseHolder.carExpenses.length>0)
-		{
-			dowhenfound(CarExpenseHolder.carExpenses);
-		}
-		else
-		{
-			$.get(self.fetcher.getAllExpenses,function(rawExpenses)
-			{
-				rawExpenses=JSON.parse(rawExpenses);
-			 	var rslt= 	$.map(rawExpenses,function(rawExpense)
-					{
-						return CarExpenseCreator.createFromRaw(rawExpense);
-					});
-				
-				CarExpenseHolder.carExpenses= rslt;
-				dowhenfound(CarExpenseHolder.carExpenses);
-			});
-		}
-	};
-	
-	
-	return self;
-
 };
- 
+
+ //temporarily putting Merchants up 
+ModelHolder.Merchant.updateMapWithArray([
+	MerchantCreator.createFromRaw({id:1,name:"garage excellence"}),
+	MerchantCreator.createFromRaw({id:2,name:"canadian tire"})
+	]);
+	
