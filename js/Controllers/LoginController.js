@@ -11,7 +11,7 @@ var LoginController = function(args)
 	submitBtn.onclick = function()
 	{	var cred= new KuaminikaCredentials({usr:usrInput.value,pwd:pwdInput.value});
 		var authenticator = new KuaminikaAuthenticator({url: fetcher.Login.authenticate,credentials:cred}); 
-		authenticator.authenticate()
+		authenticator.authenticate();
 		
 	};
 

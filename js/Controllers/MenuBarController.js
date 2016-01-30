@@ -7,9 +7,14 @@ var MenuBarController= function(args)
 	var logOutBtn= document.getElementById("logOutBtn");
 	var expenseIncomeToggler = document.getElementById("expenseIncomeToggler");
 	var ControllerOptions = {
-								"income":"IncomeController"
-								,"expense":"ExpenseController"
+								"income":"IncomeController",
+								"expense":"ExpenseController"
 							};
+							
+							
+	// side buttons
+	var usrBtn = document.getElementById("usrBtn");
+	
 		self.initiatedController = null;	
 	$.each(expenseIncomeToggler.children,function()
 	{
@@ -66,8 +71,10 @@ var MenuBarController= function(args)
 	{
 		$.get(fetcher.Login.getUserInfo,function(userInfo){
 			userInfo=JSON.parse(userInfo);
-			console.log(userInfo);
-			usrDisplay.innerHTML=userInfo.usr;
+			currentUserInfo= new User(userInfo);
+			currentOrganization = new Organization({id:1,name:"Kuaminika-dev",owner:"herman"});
+			console.log(currentUserInfo);
+			usrDisplay.innerHTML=currentUserInfo.usr;
 		});
 		
 		//launching expenseIncomeToggler
@@ -98,7 +105,14 @@ var MenuBarController= function(args)
 													   	 		self.initiatedController.init();
 													   }});
 			trimesterDropdown.valueHolder.innerHTML="Trimester"+":"+CurrentInfo.trimester.name;
-				self.initiatedController.init();
+		 
+		usrBtn.onclick = function()
+		{
+			var usrController = new UserController();
+			usrController.init();
+		};
+		
+		self.initiatedController.init();
 		logOutBtn.onclick= function()
 		{
 			$.get(fetcher.Login.logout,function(rslt){

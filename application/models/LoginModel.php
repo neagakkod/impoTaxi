@@ -31,7 +31,7 @@ class LoginModel extends CI_Model {
 		
 			if (sha1($credentials["password"])+$found_salt["salt"]==$found_usr["pwd"])
 			{	
-				$query = $this->db->get_where('User', array('id' => $found_usr["id"]));
+				$query = $this->db->get_where('UserView', array('id' => $found_usr["id"]));
 				$userInfo=count($query->result_array())>0 ? $query->result_array()[0]:null;
 			
 				return $userInfo;

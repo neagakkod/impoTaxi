@@ -65,7 +65,15 @@ class IncomeModel extends CI_Model {
 			
 			return $query->result_array();
 		}
-		
+		public function getIncomeReportForTimeRange($month_idsInTrimester)
+		{
+			$this->db->where_in('month_id', $month_idsInTrimester);
+			$query = $this->db->get('WeeklyIncomeReport');
+			$result= $query->result_array();
+			return $result;															
+			//$monthlyContribution
+			//$this->db->where_in('id', array('20','15','22','42','86'));
+		}
 	
 		public function isAddableToPreExisting($income)
 		{

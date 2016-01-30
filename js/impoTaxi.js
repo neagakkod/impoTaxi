@@ -17,15 +17,16 @@ var isOnLoginPage = location.pathname.indexOf("/login.php")>0;
 
 
 ////
-
+// current stuff
 var CurrentInfo = function()
 				{ var currentDate = new Date();
 					var currentYear = new Year({id:currentDate.getFullYear()});
-				 return {"year":currentYear//currentDate.getFullYear()
-				  ,"trimester":!isOnLoginPage?currentYear.trimesters[Math.ceil(currentDate.getMonth()/3)]:1//TrimesterList[Math.ceil(currentDate.getMonth()/3)]:-1
-				  ,"date":currentDate
-				  }}();
-
+				 return {"year":currentYear,//currentDate.getFullYear(),
+				  "trimester":!isOnLoginPage?currentYear.trimesters[Math.ceil(currentDate.getMonth()/3)]:1,//TrimesterList[Math.ceil(currentDate.getMonth()/3)]:-1,
+				  "date":currentDate
+				  };}();
+var currentUserInfo=null;
+var currentOrganization= null;
 ///
 
 	LaunchAdressFetcher(function(addressFetcher)

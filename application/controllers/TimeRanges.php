@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class TimeRanges extends CI_Controller 
+class TimeRanges extends MY_Controller 
 {
 	private $trimesterGrid;
 	

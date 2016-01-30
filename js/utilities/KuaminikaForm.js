@@ -20,7 +20,7 @@ var KuaminikaForm = function(options)
 	self.holderId = options.holderId;
 	self.operation = options.operation;
     self.form_container = document.getElementById(self.holderId);
-	self.subject = options.subject;
+	self.subject = options.subject?options.subject:{};
 	self.blankSubject = self.subject.blank ? self.subject : subjectCreator.createBlank();
 	
 	self.view = new KuaminikaView({viewName:options.viewName,
@@ -62,7 +62,7 @@ var KuaminikaForm = function(options)
 			
 			allInputs.change(function()
 			{
-				self.subject[this.name]=this.dataset.isnumeric?parseInt(this.value):this.value;
+				self.subject[this.name]=this.dataset.isnumeric?parseFloat(this.value):this.value;
 			});
 			addBtn.onclick=function(e)
 			{
@@ -80,7 +80,7 @@ var KuaminikaForm = function(options)
 		
 			if(self.operation)
 				self.activateMode(self.operation);
-		};
+	};
 	
 	self.load= function()
 	{
@@ -92,7 +92,7 @@ var KuaminikaForm = function(options)
 	self.activateMode=function(mode)
 	{
 		//set update or add mode
-		if(mode=="update")
+		if(mode==="update")
 		{
 			self.updateBtn.show();
 			self.addBtn.hide();

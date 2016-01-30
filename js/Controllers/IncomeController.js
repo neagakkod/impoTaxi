@@ -50,7 +50,21 @@ var IncomeController = function(args){
 			var launchRptBtn = document.getElementById("launchRptBtn");
 			launchRptBtn.onclick = function()
 			{
-				open("http://kuaminika.com/dev/impotaxi/trunk/index.php/HomePage/pdf","_blank");
+					var currentTrimester = CurrentInfo.trimester;
+					var frm=document.getElementById("launchRptBtn_form");
+		
+					$.each(currentTrimester,function(k,v)
+					{  $('<input />').attr('type', 'hidden')
+						            .attr('name', k)
+						            .attr('value', v)
+						            .appendTo(frm);
+				
+					});
+					frm.action=fetcher.Incomes.rptForTimeRange;
+					frm.method="post";
+					frm.submit();
+						
+			//	open("http://kuaminika.com/dev/impotaxi/trunk/index.php/HomePage/pdf","_blank");
 			};
 		};
 		
@@ -130,6 +144,7 @@ var IncomeController = function(args){
 											var week_id=self.incomeForm.subject.week_id;
 											console.log(self.incomeForm);
 											self.gridView.reload();
+												self.addIncomeFormContainer.modal("hide"); 
 										});
 									}
 									});
@@ -154,7 +169,8 @@ var IncomeController = function(args){
 					ModelHolder["WeeklyIncome"].updateMapWithArray(incomes);
 					self.gridView.data = incomes;
 					self.gridView.loadElement = function()
-											{
+											{	
+												self.addIncomeFormContainer.modal("show"); 
 									     	  	var subject_id = this.id.split("_")[1];
 									     	 	self.incomeForm.subject = ModelHolder["WeeklyIncome"].get(subject_id);
 									     	 	self.incomeForm.operation = "update";

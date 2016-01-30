@@ -58,38 +58,73 @@ class HomePage extends MY_Controller
 	}
 	public function test($id = false)
 	{
-	  //echo "im testing".$id;
-	  //IncomeModel
-	 // echo number_format(microtime(true)*1000,0,'.','');
-	//  $this->load->model('Carexpensemodel');
+		 
+	 	  $this->load->view('UserForm');
+	}
 	
-	$inc= $this->load->model('IncomeModel');
 	
-	print_r($this->IncomeModel->getMonthLyIncomeSummary(11));
-	  // $this->Carexpensemodel->deleteCarExpense($id);
-	    /*  $size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB);
-    $iv = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
-    echo $iv;*/
-	    /*$this->load->model('Carexpensemodel');
-	     echo "Carexpensemodel loaded</br>";
-	     $expense=$this->Carexpensemodel->get_expense(1);
-	     
-	     echo "got expense of id 1</br>";
-	     
-	     print_r($expense);
-	     echo "</br>";
-	      
-	      echo "modifying expense</br>";
-	     $expense["amount"]=800;
-	     print_r($expense);
-	     
-	      echo "</br>";
-	      echo "modified</br>";
-	      
-	      
-	      $this->Carexpensemodel->addCarExpense($expense);
-	      echo "inserted as new expense</br>";*/
+	public function incomeReport()
+	{
+		$this->load->helper('pdf_helper');
+		$this->load->library('contributionReportMap');
+		$inc= $this->load->model('IncomeModel');
+		$tpsRate= 0.05;
+	    $tvqRate= 0.09975;
+		$l= array(7,8,9);//array(10,11,12);
+	
+	 	$incomes=$this->IncomeModel->getIncomeReportForTimeRange($l);
+	
+		 $currentContributionMapKey="";
+		 
+	 	 foreach ($incomes as $key => $value)
+	 	 {
+	 	
+	 	 	$currentContributionMapKey= $incomes[$key]["year_id"]."".$incomes[$key]["month_id"]."".$incomes[$key]["provider_id"];
+	 	 	$this->contributionreportmap->addAToDrviverContrbution( $incomes[$key]["grossTotal"]
+	 	 									,$incomes[$key]["month_id"]
+	 	 									,$incomes[$key]["days"]
+	 	 									,array("id"=>$incomes[$key]["provider_id"],"name"=>$incomes[$key]["provider_name"])
+	 	 									, $incomes[$key]["year_id"]
+	 	 									,date("d M",  round($incomes[$key]["raw_date_start"]/1000))
+	 	 									,date("d M",  round($incomes[$key]["raw_date_end"]/1000)));
+	 
+	 	 }
+	 	 $this->contributionreportmap->loadMonthMap();
+	 	 $spanInfo= array();
+	 	 foreach ($this->contributionreportmap->monthMap as $key => $value)
+	 	 {
+	 	 	 $detailtSetArr=$this->contributionreportmap->monthMap[$key]->provisionDetail;
+	 	     $spanInfo[$key]=count($detailtSetArr)+1;
+	 	 
+	 	 	foreach($detailtSetArr as $dt)
+	 	 	{
+	 	 		$innerDetailtSetArr=$dt->provisionDetail;
+	 			$spanInfo[$key."_".$dt->provider["name"]]=count($innerDetailtSetArr)+1;
+	 	 		$spanInfo[$key]+=count($innerDetailtSetArr);
+	 	 	}
+	 	 }
+		
+		$data=array("spanInfo"=> $spanInfo
+				   ,"tpsRate"=>$tpsRate
+				   ,"tvqRate"=>$tvqRate
+					);
+		  $this->load->view('income_report', $data);
+	}
+	public function log($msg)
+	{
+		if(is_string($msg))
+		echo $msg;
+		else
+		print_r($msg);
+		
+		echo "<br/>";
+	}
+	public function debugThis($dME)
+	{
+		  
 	    
+				echo json_encode($dME );
+	 		exit;
 	}
 }
 ?>

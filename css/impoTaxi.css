@@ -76,3 +76,29 @@ th.smallCol
 	font-size: small;
 	width: 13%;
 }
+
+
+/**- side menu-*/
+
+#sideMenu ul
+{
+	list-style-type: none;
+	margin: 10px 0 0 0;
+	padding:0
+}
+#sideMenu ul li
+{
+	padding:0;
+	margin-top: 20px;
+}
+#sideMenu ul li button
+{
+	height:65px;
+	padding: 10px 5px;
+}
+
+.sideMenuBtnText
+{
+	font-size:12px
+}
+/**--*/

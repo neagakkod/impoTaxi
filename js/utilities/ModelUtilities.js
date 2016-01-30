@@ -38,7 +38,8 @@ var ModelHolder = {
 	timeRanges_Months:new IdentityMap(),
 	Week:new IdentityMap(),
 	Driver:new IdentityMap(),
-	Merchant: new IdentityMap()
+	Merchant: new IdentityMap(),
+	User: new IdentityMap()
 };
 
 

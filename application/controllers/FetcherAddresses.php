@@ -16,9 +16,13 @@ class FetcherAddresses extends CI_Controller
 															   "add"=>"index.php/CarExpenses/add",
 															   "delete"=>"index.php/CarExpenses/delete/",
 															   "update"=>"index.php/CarExpenses/update",
-															   "getForTimeRange"=>"index.php/CarExpenses/getForTimeRange"
+															   "getForTimeRange"=>"index.php/CarExpenses/getForTimeRange",
+															   "rptForTimeRange"=>"index.php/CarExpenses/getReportForTimeRange"
 															),
 											"Cars" =>array("getAll"=>"index.php/Cars/"),
+											"Users"=>array("getByOrganization"=>"index.php/Users/getByOrganization/",
+														   "getById"=>"index.php/Users/getById/",
+														   "add"=>"index.php/Users/add/"),
 											"Login"=>array("authenticate"=>"index.php/Login/authenticate",
 														   "getUserInfo"=>"index.php/Login/getUserInfo",
 														   "logout"=>"index.php/Login/logout"),
@@ -34,7 +38,8 @@ class FetcherAddresses extends CI_Controller
 															 "weeklyIncome"=>"index.php/Incomes/incomesInWeek/",
 															 "add"=>"index.php/Incomes/addWeeklyIncome/",
 															 "update"=>"index.php/Incomes/updateWeeklyIncome/",
-															 "delete"=>"index.php/Incomes/deleteWeeklyIncomeBYId/"),
+															 "delete"=>"index.php/Incomes/deleteWeeklyIncomeBYId/",
+															 "rptForTimeRange"=>"index.php/Incomes/getReportForTimeRange"),
 											"Drivers"=>array("full"=>"index.php/drivers/get/",
 															 "light"=>"index.php/drivers/getLight/"));
 	 //echo base_url();

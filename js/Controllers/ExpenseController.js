@@ -40,6 +40,7 @@ var ExpenseController= function(viewset)
 		{
 			console.log(data);
 				self.grid.reload();
+					self.formContainer.modal("hide"); 
 		});
 	};
 
@@ -52,7 +53,7 @@ var ExpenseController= function(viewset)
 			if(data.success)
 			{
 			
-				if(self.form.subject.id==id)
+				if(self.form.subject.id===id)
 				{
 					self.form.subject=null;
 				}
@@ -72,18 +73,18 @@ var ExpenseController= function(viewset)
 	self.topMenuContainer = document.getElementById(topMenuContainer_id);
 	
 	self.formContainer = 	$("#"+editFormContainer_id);
-	self.form = new ExpenseForm({viewName:_editViewName
-								,holderId:editFormContainer_id//"rightPart"
-								,subject:ceCreator.createBlank()
-								,subjectType:"CarExpense"
-								,addBtnProcedure:function(newEx)
+	self.form = new ExpenseForm({viewName:_editViewName,
+								 holderId:editFormContainer_id,//"rightPart"
+								 subject:ceCreator.createBlank(),
+								 subjectType:"CarExpense",
+								 addBtnProcedure:function(newEx)
 								{
 									self.add(newEx);
 									loadAddExpenseForm();
 									self.formContainer.modal("hide"); 
 									//loadAddExpenseForm();
-								}
-								,updateBtnProcedure:self.update
+								},
+								updateBtnProcedure:self.update
 								
 								
 								});
@@ -107,7 +108,19 @@ var ExpenseController= function(viewset)
 		var launchRptBtn = document.getElementById("launchRptBtn");
 		launchRptBtn.onclick = function()
 		{
-			open("http://kuaminika.com/dev/impotaxi/trunk/index.php/HomePage/pdf","_blank");
+			var currentTrimester = CurrentInfo.trimester;
+			var frm=document.getElementById("launchRptBtn_form");
+
+			$.each(currentTrimester,function(k,v)
+			{  $('<input />').attr('type', 'hidden')
+				            .attr('name', k)
+				            .attr('value', v)
+				            .appendTo(frm);
+		
+			});
+			frm.action=fetcher.CarExpenses.rptForTimeRange;
+			frm.method="post";
+			frm.submit();
 		};
 	};
 
@@ -129,6 +142,7 @@ var ExpenseController= function(viewset)
 			self.grid.data= expenses;
 			self.grid.loadElement = function()
 											{
+													self.formContainer.modal("show"); 
 									     	  	var subject_id = this.id.split("_")[1];
 									     	 	self.form.subject = ModelHolder["CarExpense"].get(subject_id);
 									     	 	self.form.operation = "update";

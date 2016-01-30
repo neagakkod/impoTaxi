@@ -57,6 +57,7 @@
 			 <div class="col-md-offset-9">
 			 	<button id = "launchAddSubject"  type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus "></span> AJOUTER </button> 
 			 	<button id = "launchRptBtn"  type="button" class="btn btn-primary"><span class="glyphicon glyphicon-file"></span> RAPPORT</button>
+			 	<form  id="launchRptBtn_form" target="_blank" style="display: none"></form>
 			 </div>
 			 <hr></hr>
 		</div>
@@ -73,7 +74,39 @@
 	</div>
 	<div id="sideMenu" class="col-md-1">
 		
-			<div><h2 class="add">Place for btns!</h2></div>
+		<ul>
+			<li>
+				<button id="orgnBtn" type="button" class=" btn btn-warning btn-lg btn-block"> 
+					<span class="glyphicon glyphicon-user"></span><br/>
+					<span class="sideMenuBtnText">Organisation</span>
+				</button>
+			</li>
+			<li>
+				<button id="usrBtn" type="button" class=" btn btn-warning btn-lg btn-block"> 
+					<span class="glyphicon glyphicon-user"></span><br/>
+					<span class="sideMenuBtnText">Usagers</span>
+				</button>
+			</li>
+			<li>
+				<button id="driverBtn"  type="button" class=" btn btn-warning btn-lg btn-block"> 
+					<span class="glyphicon glyphicon-user"></span><br/>
+					<span class="sideMenuBtnText">Chauffeurs</span>
+				</button>
+			</li>
+			<li>
+				<button id="merchantBtn" type="button" class=" btn btn-warning btn-lg btn-block"> 
+					<span class="glyphicon glyphicon-shopping-cart"></span><br/>
+					<span class="sideMenuBtnText">Marchands</span>
+				</button>
+			</li>
+			<li>
+				<button id="cartBtn" type="button" class=" btn btn-warning btn-lg btn-block"> 
+					<span class="glyphicon glyphicon-user"></span><br/>
+					<span class="sideMenuBtnText">Voitures</span>
+				</button>
+			</li>
+		</ul>
+		
 	</div>
 
 	
@@ -107,12 +140,14 @@
     <script src="js/utilities/FormUtilities.js"></script>
     <script src="js/utilities/KuaminikaForm.js"></script>
     <script src="js/utilities/TimeRangeForm.js"></script>
+    <script src="js/utilities/UserForm.js"></script>
     <script src="js/utilities/IncomeForm.js"></script>
     <script src="js/utilities/ExpenseForm.js"></script>
     <script src="js/utilities/HBHelpers.js"></script>
 
     <!-- Models -->
     <script src="js/utilities/ModelUtilities.js"></script>
+    <script src="js/Models/Organization.js"></script>
 	<script src="js/Models/TaxAndInsurance.js"></script>
     <script src="js/Models/Merchant.js"></script>
     <script src="js/Models/Car.js"></script>
@@ -123,6 +158,7 @@
 	<script src="js/Models/User.js"></script>
 	
 	<!-- controllers -->
+    <script src="js/Controllers/UserController.js"></script>
 	<script src="js/Controllers/IncomeController.js"></script>
     <script src="js/Controllers/ExpenseController.js"></script>
     <script src="js/Controllers/MenuBarController.js"></script>
